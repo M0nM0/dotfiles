@@ -19,8 +19,9 @@ alias x64="exec arch -arch x86_64 /bin/zsh --login"
 
 alias reload='source ~/.zshrc'
 
-# User Name
-# export PS1="%n@MBP %1~ %# "
+# Editor
+export EDITOR=nvim
+export VISUAL="$EDITOR"
 
 # Homebrew
 export PATH=/opt/homebrew/bin:$PATH
