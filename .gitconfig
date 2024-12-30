@@ -1,0 +1,28 @@
+[user]
+	name = Visha765
+	email = lewis.ap75@gmail.com
+
+[alias]
+	s = status
+	ss = status -s
+	sw = switch
+	c = commit -m
+	cm = commit
+	a = add
+	aa = add -A
+	ac = commit -am
+	ps = push
+	pl = pull
+	b = branch
+	co = checkout
+	d = diff
+	l = log
+        lo = log --oneline
+	f = fetch
+	m = merge
+	pl = pull
+	rs = restore
+	rsst = restore --staged
+	r = reset
+[init]
+	defaultBranch = main
