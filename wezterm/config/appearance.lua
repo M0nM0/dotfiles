@@ -19,7 +19,8 @@ return {
    cursor_blink_rate = 700,
 
    -- color scheme
-   colors = colors,
+   -- colors = colors, -- use colors.custom
+   color_scheme = 'Japanesque (Gogh)',
 
    -- background
    background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
@@ -29,7 +30,7 @@ return {
    enable_scroll_bar = true,
 
    -- title bar
-   window_decorations = "RESIZE",
+   window_decorations = "NONE", -- "RESIZE" | "TITLE" | "NONE"
 
    -- tab bar
    enable_tab_bar = true,
@@ -37,6 +38,7 @@ return {
    -- TODO: tab barを透明にする
    use_fancy_tab_bar = false,
    tab_max_width = 25,
+   -- tab_bar_at_bottom = true,
    show_tab_index_in_tab_bar = false,
    switch_to_last_active_tab_when_closing_tab = true,
 
