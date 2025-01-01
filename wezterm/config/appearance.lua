@@ -30,7 +30,7 @@ return {
    enable_scroll_bar = true,
 
    -- title bar
-   window_decorations = "NONE", -- "RESIZE" | "TITLE" | "NONE"
+   window_decorations = "RESIZE", -- "RESIZE" | "TITLE" | "NONE"
 
    -- tab bar
    enable_tab_bar = true,
@@ -44,9 +44,9 @@ return {
 
    -- window
    window_padding = {
-      left = 0,
-      right = 0,
-      top = 10,
+      left = 4,
+      right = 4,
+      top = 7.5,
       bottom = 7.5,
    },
    adjust_window_size_when_changing_font_size = false,
