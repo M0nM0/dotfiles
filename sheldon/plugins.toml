@@ -60,6 +60,9 @@ apply = ["defer"]
 github = 'yuki-yano/zeno.zsh'
 apply = ["defer"]
 
+[plugins.zsh-autocomplete]
+github = "marlonrichert/zsh-autocomplete"
+
 #[plugins.starship]
 #github = "starship/starship"
 
