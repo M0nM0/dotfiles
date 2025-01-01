@@ -75,17 +75,17 @@ end
 ---@return table
 function BackDrops:_create_opts()
    return {
-      {
-         source = { File = self.images[self.current_idx] },
-         horizontal_align = 'Center',
-      },
+      -- {
+      --    source = { File = self.images[self.current_idx] },
+      --    horizontal_align = 'Center',
+      -- },
       {
          source = { Color = colors.background },
          height = '120%',
          width = '120%',
          vertical_offset = '-10%',
          horizontal_offset = '-10%',
-         opacity = 0.96,
+         opacity = 0.75,
       },
    }
 end

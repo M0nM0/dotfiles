@@ -15,15 +15,14 @@ return {
    animation_fps = 120,
    cursor_blink_ease_in = 'EaseOut',
    cursor_blink_ease_out = 'EaseOut',
-   default_cursor_style = 'BlinkingBlock',
-   cursor_blink_rate = 650,
+   default_cursor_style = 'BlinkingBar',
+   cursor_blink_rate = 700,
 
    -- color scheme
    colors = colors,
 
    -- background
    background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
-   window_background_opacity = 0.80,
    macos_window_background_blur = 20,
 
    -- scrollbar
