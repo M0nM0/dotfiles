@@ -93,7 +93,7 @@ alias fv="fvim"
 # かつていたことのあるディレクトリに移動する
 # https://qiita.com/kamykn/items/aa9920f07487559c0c7e
 fzf-z-search() {
-    local res=$(z | sort -rn | cut -c 12- | fzf)
+    local res=$(z | sort -rn | cut -c 12- | fzf --preview 'tree -C {} 2>/dev/null || ls -lh {}')
     if [ -n "$res" ]; then
         BUFFER+="cd $res"
         zle accept-line
@@ -103,7 +103,7 @@ fzf-z-search() {
 }
 
 zle -N fzf-z-search
-bindkey '^z' fzf-z-search
+bindkey '^f' fzf-z-search
 
 # プロセスをkill
 fkill() {
