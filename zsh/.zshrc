@@ -1,9 +1,4 @@
-# Alias
-alias doc='cd /Users/visha/Documents'
-alias des='cd /Users/visha/Desktop'
-export OD=/Users/visha/'OneDrive - 筑波大学'
-alias lab='cd "$OD/LABO"'
-
+############### Alias ###############
 alias g="git"
 alias nv="nvim"
 alias py="python"
@@ -11,13 +6,19 @@ alias ve="virtualenv"
 alias rb="ruby"
 alias ra="rails"
 
-alias ll="ls -l"
-alias dbe="docker compose exec puma bundle exec"
+alias ll="ls -la"
 
 alias arm="exec arch -arch arm64e /bin/zsh --login"
 alias x64="exec arch -arch x86_64 /bin/zsh --login"
 
 alias reload='source ~/.zshrc'
+
+############### User Specific Alias ###############
+alias doc='cd "$HOME/Documents"'
+alias des='cd "$HOME/Desktop"'
+export OD=/Users/visha/'OneDrive - 筑波大学'
+alias lab='cd "$OD/LABO"'
+alias dbe="docker compose exec puma bundle exec"
 
 # Editor
 export EDITOR=nvim
@@ -43,6 +44,13 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# starship
+eval "$(starship init zsh)"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # exclude unneeded history
 zshaddhistory() {
@@ -76,11 +84,4 @@ export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
 export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 
 # opam configuration
-test -r /Users/visha/.opam/opam-init/init.zsh && . /Users/visha/.opam/opam-init/init.zsh >/dev/null 2>/dev/null || true
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# starship
-eval "$(starship init zsh)"
-export PATH="$HOME/.cargo/bin:$PATH"
+test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null || true
