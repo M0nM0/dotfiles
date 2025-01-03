@@ -35,15 +35,7 @@ export PATH=$PATH:/usr/local/texlive/2023/bin/universal-darwin
 # zsh
 eval "$(sheldon source)"
 EDITOR='nvim sheldon edit'
-
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-  autoload -Uz compinit
-  compinit
-fi
+bindkey -e
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
