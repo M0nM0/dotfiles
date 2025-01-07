@@ -30,7 +30,6 @@ CONF="$HOME/.config"
 # .configディレクトリが存在しない場合は作成
 mkdir -p "$CONF"
 
-create_symlink "$DOT/nvim" "$CONF/nvim"
 create_symlink "$DOT/sheldon" "$CONF/sheldon"
 create_symlink "$DOT/wezterm" "$CONF/wezterm"
 create_symlink "$DOT/starship.toml" "$CONF/starship.toml"
