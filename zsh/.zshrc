@@ -34,7 +34,6 @@ export PATH=$PATH:/usr/local/texlive/2023/bin/universal-darwin
 
 # zsh
 eval "$(sheldon source)"
-EDITOR='nvim sheldon edit'
 bindkey -e
 # autosuggestion
 if type brew &>/dev/null; then
