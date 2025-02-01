@@ -29,7 +29,7 @@ $line_break$character"""
 
 palette = 'gruvbox_dark'
 
-command_timeout = 1000
+command_timeout = 3000
 scan_timeout = 500
 
 [palettes.gruvbox_dark]
