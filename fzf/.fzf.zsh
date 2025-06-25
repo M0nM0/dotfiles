@@ -1,8 +1,21 @@
-# Setup fzf                                                                                          
-if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then                                                 
-  PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"                                                     
-fi                                                                                               
-eval "$(fzf --zsh)"
+# Setup fzf
+# macOS (Homebrew) の場合
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+    PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+  fi
+  eval "$(fzf --zsh)"
+
+# Linux の場合
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if [ -d "$HOME/.fzf/bin" ] && [[ ":$PATH:" != *":$HOME/.fzf/bin:"* ]]; then
+    PATH="$PATH:$HOME/.fzf/bin"
+  fi
+
+  if [ -f "$HOME/.fzf.zsh" ]; then
+    source "$HOME/.fzf.zsh"
+  fi
+fi
 
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
