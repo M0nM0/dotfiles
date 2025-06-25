@@ -1,0 +1,74 @@
+############### Alias ###############
+alias g="git"
+alias nv="nvim"
+alias lg="lazygit"
+alias py="python"
+alias ve="virtualenv"
+alias rb="ruby"
+alias ra="rails"
+
+alias ll="ls -la"
+
+alias reload='source ~/.zshrc'
+
+############### User Specific Alias ###############
+alias doc='cd "$HOME/Documents"'
+alias des='cd "$HOME/Desktop"'
+
+# Editor
+export EDITOR=nvim
+export VISUAL="$EDITOR"
+export PATH=$PATH:$HOME/.local/bin
+
+
+# zsh
+eval "$(sheldon source)"
+bindkey -e
+# autosuggestion
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# starship
+eval "$(starship init zsh)"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# exclude unneeded history
+zshaddhistory() {
+  local line="${1%%$'\n'}"
+  [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
+}
+
+# pyenv
+eval "$(pyenv init -)"
+
+# nodenv
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "$(nodenv init -)"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# goenv
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+
+# color theme
+export CLICOLOR=1
+export TERM=xterm-256color
+
+# Android Studio
+export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk
+export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
+export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
+
+# opam configuration
+test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null || true
+
