@@ -1,11 +1,14 @@
 ############### Alias ###############
 alias g="git"
+alias lg='lazygit'
 alias nv="nvim"
 alias lg="lazygit"
+alias tm="tmux"
 alias py="python"
 alias ve="virtualenv"
 alias rb="ruby"
 alias ra="rails"
+alias tf="terraform"
 
 alias ll="ls -la"
 
@@ -17,8 +20,6 @@ alias reload='source ~/.zshrc'
 ############### User Specific Alias ###############
 alias doc='cd "$HOME/Documents"'
 alias des='cd "$HOME/Desktop"'
-export OD=/Users/visha/'OneDrive - 筑波大学'
-alias lab='cd "$OD/LABO"'
 alias dbe="docker compose exec puma bundle exec"
 
 # Editor
@@ -36,9 +37,10 @@ export PATH=$PATH:/usr/local/texlive/2023/bin/universal-darwin
 # zsh
 eval "$(sheldon source)"
 bindkey -e
+
 # autosuggestion
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+ FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 fi
 
 # fzf
@@ -82,3 +84,13 @@ export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 # opam configuration
 test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null || true
 
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="$HOME/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# OpenJDK
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

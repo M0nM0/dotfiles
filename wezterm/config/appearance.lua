@@ -20,7 +20,8 @@ return {
 
    -- color scheme
    -- colors = colors, -- use colors.custom
-   color_scheme = 'Japanesque (Gogh)',
+   -- color_scheme = 'Japanesque',
+   color_scheme = 'Adventure',
 
    -- background
    background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
