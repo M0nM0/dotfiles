@@ -21,7 +21,7 @@ create_symlink() {
 create_symlink "$DOT/zsh/.zshrc" "$HOME/.zshrc"
 # create_symlink "$DOT/.tmux" "$HOME/.tmux"
 [ ! -d "$HOME/.tmux/plugins/tpm" ] && git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
-create_symlink "$DOT/.tmux/.tmux.conf" "$HOME/.tmux.conf"
+create_symlink "$DOT/tmux/.tmux.conf" "$HOME/.tmux.conf"
 create_symlink "$DOT/fzf/.fzf.zsh" "$HOME/.fzf.zsh"
 create_symlink "$DOT/.gitconfig" "$HOME/.gitconfig"
 create_symlink "$DOT/latex/.latexindent.yaml" "$HOME/.latexindent.yaml"
