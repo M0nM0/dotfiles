@@ -20,12 +20,12 @@ return {
 
    -- color scheme
    -- colors = colors, -- use colors.custom
-   -- color_scheme = 'Japanesque',
-   color_scheme = 'Adventure',
+   color_scheme = 'Japanesque',
+   -- color_scheme = 'Adventure',
 
    -- background
-   background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
-   window_background_opacity = 0.8,
+   -- background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
+   window_background_opacity = 0.90,
    macos_window_background_blur = 10,
 
    -- scrollbar
