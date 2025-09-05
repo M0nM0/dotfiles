@@ -36,6 +36,7 @@ export PATH=$PATH:/usr/local/texlive/2023/bin/universal-darwin
 
 # zsh
 eval "$(sheldon source)"
+zstyle ':completion:*' completer _complete _prefix
 bindkey -e
 
 # autosuggestion
