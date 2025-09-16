@@ -93,6 +93,7 @@ fzf-z-search() {
         BUFFER+="cd $res"
         zle accept-line
     else
+        zle redisplay
         return 1
     fi
 }
@@ -107,8 +108,8 @@ fzf-history-search() {
     if [ -n "$selected" ]; then
         BUFFER="$selected"
         CURSOR=$#BUFFER
-        zle redisplay
     fi
+    zle redisplay
 }
 zle -N fzf-history-search
 bindkey '^R' fzf-history-search
