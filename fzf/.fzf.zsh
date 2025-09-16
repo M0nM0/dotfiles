@@ -100,6 +100,19 @@ fzf-z-search() {
 zle -N fzf-z-search
 bindkey '^f' fzf-z-search
 
+# fzf履歴検索
+fzf-history-search() {
+    local selected
+    selected=$(fc -rl 1 | awk '{$1=""; print substr($0,2)}' | fzf --height 40% --reverse --border)
+    if [ -n "$selected" ]; then
+        BUFFER="$selected"
+        CURSOR=$#BUFFER
+        zle redisplay
+    fi
+}
+zle -N fzf-history-search
+bindkey '^R' fzf-history-search
+
 # プロセスをkill
 fkill() {
   local pid
