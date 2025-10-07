@@ -20,8 +20,16 @@ return {
 
    -- color scheme
    -- colors = colors, -- use colors.custom
-   color_scheme = 'Japanesque',
+   color_scheme = 'Github Dark',
    -- color_scheme = 'Adventure',
+
+   -- bold text brightness
+   bold_brightens_ansi_colors = true,
+
+   -- text brightness
+   foreground_text_hsb = {
+      brightness = 1.2,
+   },
 
    -- background
    -- background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
