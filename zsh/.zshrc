@@ -51,8 +51,6 @@ function zvm_after_init() {
   bindkey -M viins '^K' kill-line
   bindkey -M viins '^U' backward-kill-line
   bindkey -M viins '^W' backward-kill-word
-  bindkey -M viins '^F' forward-char
-  bindkey -M viins '^B' backward-char
 }
 
 zstyle ':completion:*' completer _complete _prefix
