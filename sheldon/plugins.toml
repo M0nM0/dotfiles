@@ -16,6 +16,9 @@ shell = "zsh"
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
 
+[plugins.zsh-vi-mode]
+github = "jeffreytse/zsh-vi-mode"
+
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 apply = ["defer"]

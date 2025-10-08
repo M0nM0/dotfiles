@@ -36,19 +36,33 @@ export PATH=$PATH:/usr/local/texlive/2023/bin/universal-darwin
 
 # zsh
 eval "$(sheldon source)"
+
+# zsh-vi-mode初期化後にfzf/starshipを初期化（競合回避）
+function zvm_after_init() {
+  # fzf
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+  # starship
+  eval "$(starship init zsh)"
+
+  # インサートモードでEmacsキーバインド（行内編集）
+  bindkey -M viins '^A' beginning-of-line
+  bindkey -M viins '^E' end-of-line
+  bindkey -M viins '^K' kill-line
+  bindkey -M viins '^U' backward-kill-line
+  bindkey -M viins '^W' backward-kill-word
+  bindkey -M viins '^F' forward-char
+  bindkey -M viins '^B' backward-char
+}
+
 zstyle ':completion:*' completer _complete _prefix
-bindkey -e
 
 # autosuggestion
 if type brew &>/dev/null; then
  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 fi
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# starship
-eval "$(starship init zsh)"
+# cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # exclude unneeded history
