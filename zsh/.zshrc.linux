@@ -21,16 +21,18 @@ export VISUAL="$EDITOR"
 export PATH=$PATH:$HOME/.local/bin
 
 
-# zsh
+# zsh-vi-mode: Load fzf after zsh-vi-mode initialization
+zvm_after_init() {
+  # fzf
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+
 eval "$(sheldon source)"
-bindkey -e
+
 # autosuggestion
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 fi
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # starship
 eval "$(starship init zsh)"
