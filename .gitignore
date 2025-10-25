@@ -10,3 +10,6 @@ tmux/plugins/
 # 環境変数（トークン等）
 .env
 
+# MCP生成ファイル
+.mcp.json
+
