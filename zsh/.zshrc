@@ -1,27 +1,3 @@
-############### Alias ###############
-alias g="git"
-alias lg='lazygit'
-alias nv="nvim"
-alias lg="lazygit"
-alias tm="tmux"
-alias py="python"
-alias ve="virtualenv"
-alias rb="ruby"
-alias ra="rails"
-alias tf="terraform"
-
-alias ll="ls -la"
-
-alias arm="exec arch -arch arm64e /bin/zsh --login"
-alias x64="exec arch -arch x86_64 /bin/zsh --login"
-
-alias reload='source ~/.zshrc'
-
-############### User Specific Alias ###############
-alias doc='cd "$HOME/Documents"'
-alias des='cd "$HOME/Desktop"'
-alias dbe="docker compose exec puma bundle exec"
-
 # Editor
 export EDITOR=nvim
 export VISUAL="$EDITOR"
@@ -31,11 +7,18 @@ export PATH=/opt/homebrew/bin:$PATH
 export PATH=/opt/homebrew/sbin:$PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Tex
-export PATH=$PATH:/usr/local/texlive/2023/bin/universal-darwin
-
 # zsh
 eval "$(sheldon source)"
+
+# direnv (.envrc自動読み込み)
+export DIRENV_LOG_FORMAT=""
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
+
+# color theme
+export CLICOLOR=1
+export TERM=xterm-256color
 
 # zsh-vi-mode初期化後にfzf/starshipを初期化（競合回避）
 function zvm_after_init() {
@@ -86,16 +69,6 @@ export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
-
-# direnv (.envrc自動読み込み)
-export DIRENV_LOG_FORMAT=""
-if command -v direnv >/dev/null 2>&1; then
-    eval "$(direnv hook zsh)"
-fi
-
-# color theme
-export CLICOLOR=1
-export TERM=xterm-256color
 
 # Android Studio
 export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk

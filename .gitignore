@@ -13,3 +13,6 @@ tmux/plugins/
 # MCP生成ファイル
 .mcp.json
 
+# 環境固有のalias設定
+zsh/aliases/local.zsh
+

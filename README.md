@@ -144,6 +144,25 @@ make install-packages
 sheldon lock --update
 ```
 
+### alias管理
+
+aliasはカテゴリ別にファイル分割し、sheldonで管理しています。
+
+#### ファイル構成
+
+```
+zsh/aliases/
+├── common-tools.zsh      # 汎用ツール短縮形（g, lg, nv等）
+├── common-commands.zsh   # 汎用コマンド拡張（ll, reload等）
+├── navigation.zsh        # ディレクトリ移動（doc, des等）
+├── mac.zsh               # Mac固有（arm, x64等）
+└── local.zsh            # 環境固有（git管理外）
+```
+
+#### 環境固有aliasの追加
+
+仕事用やマシン固有のaliasは `zsh/aliases/local.zsh` に追加します（git管理外）。
+
 ### MCP設定（Claude Code + Gemini CLI）
 
 MCPサーバーの設定は`mcp/conf.d/`で管理します。

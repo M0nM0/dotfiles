@@ -1,0 +1,10 @@
+# Common tool shortcuts
+alias g="git"
+alias lg="lazygit"
+alias nv="nvim"
+alias tm="tmux"
+alias py="python"
+alias ve="virtualenv"
+alias rb="ruby"
+alias ra="rails"
+alias tf="terraform"
