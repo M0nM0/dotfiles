@@ -1,6 +1,5 @@
 # バージョンマネージャー
 pyenv
-nodenv
 rbenv
 goenv
 
@@ -9,6 +8,7 @@ neovim
 tmux
 git
 curl
+uv
 
 # CLI ツール
 gh

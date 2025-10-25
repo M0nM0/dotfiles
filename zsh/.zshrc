@@ -71,8 +71,10 @@ zshaddhistory() {
 
 # pyenv
 eval "$(pyenv init -)"
-export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init -)"
+
+# Volta (Node.js version manager)
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"

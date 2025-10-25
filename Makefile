@@ -1,6 +1,9 @@
-.PHONY: install link update help install-packages install-brew install-brew-packages install-npm install-cargo
+.PHONY: install link update help install-packages install-brew install-rust install-volta install-nodejs install-brew-packages install-npm install-cargo
 
 UNAME := $(shell uname)
+VOLTA_HOME := $(HOME)/.volta
+CARGO_HOME := $(HOME)/.cargo
+SHELL_PATH := $(VOLTA_HOME)/bin:$(CARGO_HOME)/bin:$(PATH)
 
 help:
 	@echo "Available commands:"
@@ -10,7 +13,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: install-brew install-packages link
+install: install-brew install-rust install-volta install-nodejs install-packages link
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -36,6 +39,45 @@ install-brew:
 		fi; \
 	else \
 		echo "✅ Homebrew already installed"; \
+	fi
+
+# Rustインストール（rustup経由）
+install-rust:
+	@if ! command -v cargo >/dev/null 2>&1; then \
+		echo "📦 Installing Rust (rustup)..."; \
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; \
+		export PATH="$$HOME/.cargo/bin:$$PATH"; \
+		echo "✅ Rust installed"; \
+	else \
+		echo "✅ Rust already installed"; \
+	fi
+
+# Voltaインストール
+install-volta:
+	@if ! command -v volta >/dev/null 2>&1; then \
+		echo "📦 Installing Volta..."; \
+		curl https://get.volta.sh | bash; \
+		export VOLTA_HOME="$$HOME/.volta"; \
+		export PATH="$$VOLTA_HOME/bin:$$PATH"; \
+		echo "✅ Volta installed"; \
+	else \
+		echo "✅ Volta already installed"; \
+	fi
+
+# Node.js LTSインストール（Volta経由）
+install-nodejs:
+	@export PATH="$(SHELL_PATH)"; \
+	if ! command -v volta >/dev/null 2>&1; then \
+		echo "⚠️  Volta not found. Run: make install-volta"; \
+		exit 1; \
+	fi; \
+	if ! command -v node >/dev/null 2>&1; then \
+		echo "📦 Installing Node.js LTS with Volta..."; \
+		volta install node; \
+		volta install npm; \
+		echo "✅ Node.js LTS installed"; \
+	else \
+		echo "✅ Node.js already installed ($$(node --version))"; \
 	fi
 
 # Homebrewパッケージインストール（冪等性保証）
@@ -64,12 +106,12 @@ install-cargo:
 				echo "  ✓ $$package (already installed)"; \
 			else \
 				echo "  + Installing $$package..."; \
-				cargo install "$$package" || true; \
+				cargo install --locked "$$package" || true; \
 			fi; \
 		done < packages/cargo.txt; \
 		echo "✅ Cargo packages installed"; \
 	else \
-		echo "⚠️  cargo not found. Install Rust first: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"; \
+		echo "⚠️  cargo not found. Run: make install-rust"; \
 	fi
 
 # npmグローバルパッケージインストール（冪等性保証）
@@ -88,7 +130,7 @@ install-npm:
 		done < packages/npm.txt; \
 		echo "✅ npm packages installed"; \
 	else \
-		echo "⚠️  npm not found. Install Node.js with nodenv first."; \
+		echo "⚠️  npm not found. Run: make install-volta && make install-nodejs"; \
 	fi
 
 # 全更新

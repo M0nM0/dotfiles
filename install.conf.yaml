@@ -24,6 +24,9 @@
       path: wezterm
     ~/.config/starship.toml:
       path: starship.toml
+    ~/.config/nvim:
+      path: nvim
+      force: true
 
 - create:
     - ~/.config

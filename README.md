@@ -7,7 +7,7 @@
 - 🔄 **宣言的管理**: YAMLとテキストファイルで管理
 - 🖥️ **クロスプラットフォーム**: Mac/Linux両対応
 - 📦 **統一パッケージ管理**: Homebrew統一
-- 🔧 **バージョンマネージャー統合**: pyenv, nodenv, rbenv, goenv
+- 🔧 **バージョンマネージャー統合**: pyenv, Volta, rbenv, goenv
 - 🎨 **シェル環境**: zsh + sheldon + starship
 - 🚀 **1コマンドセットアップ**: `make install`
 
@@ -41,11 +41,29 @@ exec zsh
 
 ## 📦 管理ツール
 
+### Volta（Node.js/npmバージョン管理）⭐
+
+- **超高速**（Rust製、nvmの40倍）
+- Node.js、npm、yarnを統一管理
+- プロジェクトごとに自動バージョン切り替え
+- `package.json`でチーム共有
+
+### Rust（cargo）
+
+- rustup経由でインストール
+- cargoパッケージ: ripgrep, bat, fd-find, eza
+
+### uv（Pythonパッケージマネージャー）⭐
+
+- **超高速**（Rust製、pipの10-100倍）
+- pip、poetry、pipx、virtualenvを1つに統合
+- pipと完全互換
+- pyenvと併用可能
+
 ### Homebrew（Mac/Linux共通）
 
 バージョンマネージャー:
-- pyenv - Python
-- nodenv - Node.js
+- pyenv - Pythonバージョン管理
 - rbenv - Ruby
 - goenv - Go
 
@@ -54,6 +72,7 @@ exec zsh
 - tmux
 - git
 - curl
+- uv - Pythonパッケージマネージャー
 
 CLIツール:
 - gh - GitHub CLI
@@ -66,13 +85,6 @@ CLIツール:
 - @anthropic-ai/claude-code
 - @google/gemini-cli
 - cz-git / czg - Conventional Commits
-
-### cargo（Rustツール）
-
-- ripgrep - 高速grep
-- bat - catの改良版
-- fd-find - findの改良版
-- eza - lsの改良版
 
 ### sheldon（zshプラグイン管理）
 
@@ -145,20 +157,29 @@ prefix + I
 ```
 （デフォルトのprefixは `Ctrl+b`）
 
-### cargoがインストールされていない
+### Rust/cargoがインストールされていない
 
-Rustをインストール:
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+make install-rust
+```
+
+### Volta/Node.jsがインストールされていない
+
+```bash
+make install-volta
+make install-nodejs
 ```
 
 ## 📝 セットアップフロー
 
 1. **Homebrewインストール**（未インストール時）
-2. **brewパッケージインストール**（pyenv, nodenv, neovim等）
-3. **cargoパッケージインストール**（ripgrep, bat等）
-4. **npmパッケージインストール**（claude-code, gemini-cli等）
-5. **シンボリックリンク作成**（dotbot経由）
+2. **Rust（rustup）インストール**
+3. **Volta インストール**
+4. **Node.js LTS（Volta経由）インストール**
+5. **brewパッケージインストール**（pyenv, rbenv, goenv, neovim等）
+6. **cargoパッケージインストール**（ripgrep, bat等、`--locked`フラグ付き）
+7. **npmパッケージインストール**（claude-code, gemini-cli等）
+8. **シンボリックリンク作成**（dotbot経由）
 
 ## 🔄 更新手順
 
