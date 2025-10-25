@@ -145,3 +145,26 @@ update:
 	@if command -v npm >/dev/null 2>&1; then npm update -g; fi
 	@git submodule update --remote --merge
 	@echo "✅ All packages updated"
+
+# MCP設定の初期化
+mcp-init:
+	@echo "🔧 Initializing MCP configuration..."
+	@mkdir -p ~/.config/mcp/conf.d
+	@if [ ! -f ~/.env ]; then \
+		cp $(PWD)/.env.example ~/.env; \
+		echo "📝 Created ~/.env - Please edit with your tokens"; \
+		echo "   vim ~/.env"; \
+	else \
+		echo "✅ ~/.env already exists"; \
+	fi
+	@ln -sf $(PWD)/mcp/conf.d/00-common.json ~/.config/mcp/conf.d/00-common.json
+	@echo "✅ MCP initialized"
+	@echo ""
+	@echo "Next steps:"
+	@echo "  1. Edit ~/.env with your tokens: vim ~/.env"
+	@echo "  2. Allow direnv: direnv allow"
+	@echo "  3. Sync MCP config: make mcp-sync"
+
+# MCP設定の同期
+mcp-sync:
+	@./mcp/scripts/sync-mcp.sh

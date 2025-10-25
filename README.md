@@ -97,15 +97,30 @@ dotfiles/
 ├── Makefile              # タスクランナー
 ├── install               # dotbotブートストラップ
 ├── install.conf.yaml     # シンボリックリンク設定
+├── .env.example          # 環境変数テンプレート
+├── .envrc                # direnv設定
 ├── packages/             # パッケージリスト
 │   ├── brew.txt         # Homebrew
 │   ├── npm.txt          # npm
 │   └── cargo.txt        # cargo
+├── mcp/                  # MCP設定（Claude Code + Gemini CLI）
+│   ├── conf.d/          # 設定ファイル（番号順にマージ）
+│   │   ├── 00-common.json         # 共通設定（dotfiles管理）
+│   │   ├── 50-work.json.example   # 社内PC用テンプレート
+│   │   ├── 90-local.json.example  # ローカル用テンプレート
+│   │   └── README.md              # MCP設定ガイド
+│   ├── .gitignore       # 個人設定を除外
+│   └── scripts/
+│       └── sync-mcp.sh  # 同期スクリプト
 ├── zsh/                  # zsh設定
 ├── tmux/                 # tmux設定
 ├── sheldon/              # zshプラグイン管理
 ├── wezterm/              # ターミナル設定
-└── ...
+├── git/                  # git設定
+├── lazygit/              # lazygit設定
+├── gh/                   # GitHub CLI設定
+├── karabiner/            # Karabiner設定（Mac専用）
+└── nvim/                 # Neovim設定（submodule）
 ```
 
 ## 🔧 カスタマイズ
@@ -128,6 +143,37 @@ make install-packages
 ```bash
 sheldon lock --update
 ```
+
+### MCP設定（Claude Code + Gemini CLI）
+
+MCPサーバーの設定は`mcp/conf.d/`で管理します。
+
+#### 初回セットアップ
+
+```bash
+make mcp-init              # 初期化
+vim ~/.env                 # トークン設定（GITHUB_TOKEN等）
+direnv allow               # direnv有効化
+make mcp-sync              # Claude Code + Gemini CLIに反映
+```
+
+#### 社内PC設定の追加
+
+```bash
+cp ~/.config/mcp/conf.d/50-work.json{.example,}
+vim ~/.env                 # 社内トークン追加
+make mcp-sync              # 再同期
+```
+
+#### ローカルプロジェクト設定
+
+```bash
+cp ~/.config/mcp/conf.d/90-local.json{.example,}
+vim ~/.config/mcp/conf.d/90-local.json
+make mcp-sync
+```
+
+詳細は `mcp/conf.d/README.md` を参照。
 
 ## 🛠️ トラブルシューティング
 

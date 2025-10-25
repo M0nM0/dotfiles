@@ -15,3 +15,7 @@ gh
 ghq
 lazygit
 starship
+czg
+jq
+direnv
+gettext

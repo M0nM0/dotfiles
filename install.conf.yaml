@@ -27,6 +27,18 @@
     ~/.config/nvim:
       path: nvim
       force: true
+    ~/.config/git/ignore:
+      path: git/ignore
+    ~/.config/lazygit/config.yml:
+      path: lazygit/config.yml
+    ~/.config/gh/config.yml:
+      path: gh/config.yml
+    ~/.config/karabiner/karabiner.json:
+      path: karabiner/karabiner.json
+    ~/.config/direnv:
+      path: direnv
+    ~/.envrc:
+      path: .envrc
 
 - create:
     - ~/.config

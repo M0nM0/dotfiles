@@ -7,3 +7,6 @@ zsh/.zcompdump
 
 tmux/plugins/
 
+# 環境変数（トークン等）
+.env
+

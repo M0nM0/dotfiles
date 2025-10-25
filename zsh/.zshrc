@@ -87,6 +87,12 @@ eval "$(goenv init -)"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 
+# direnv (.envrc自動読み込み)
+export DIRENV_LOG_FORMAT=""
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
+
 # color theme
 export CLICOLOR=1
 export TERM=xterm-256color
