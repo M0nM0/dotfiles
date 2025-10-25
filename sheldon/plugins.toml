@@ -69,6 +69,16 @@ github = "marlonrichert/zsh-autocomplete"
 [plugins.cclog]
 github = "choplin/cclog"
 
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+
+[plugins.zsh-system-clipboard]
+github = "kutsan/zsh-system-clipboard"
+
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+apply = ["defer"]
+
 [plugins.fzf]
 github = 'junegunn/fzf'
 apply = ['fzf-install']
