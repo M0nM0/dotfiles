@@ -18,7 +18,6 @@ install: install-brew install-rust install-volta install-nodejs install-packages
 	@echo ""
 	@echo "Next steps:"
 	@echo "  1. Restart your shell or run: exec zsh"
-	@echo "  2. For tmux: Press prefix + I to install plugins"
 
 # シンボリックリンク作成
 link:
