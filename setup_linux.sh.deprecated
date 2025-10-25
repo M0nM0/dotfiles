@@ -1,5 +1,13 @@
 #!/bin/bash
 
+###########################################
+# DEPRECATED: このスクリプトは非推奨です
+# 代わりに以下を使用してください:
+#   make install
+#
+# 詳細はREADME.mdを参照
+###########################################
+
 # DOTFILESのパスを設定
 DOT="$HOME/dotfiles"
 
@@ -18,7 +26,7 @@ create_symlink() {
 }
 
 # ホームディレクトリの設定
-create_symlink "$DOT/zsh/.zshrc" "$HOME/.zshrc"
+create_symlink "$DOT/zsh/.zshrc.linux" "$HOME/.zshrc"
 create_symlink "$DOT/tmux" "$HOME/.tmux"
 [ ! -d "$DOT/tmux/plugins/tpm" ] && git clone https://github.com/tmux-plugins/tpm "$DOT/tmux/plugins/tpm"
 create_symlink "$DOT/tmux/.tmux.conf" "$HOME/.tmux.conf"
@@ -35,3 +43,13 @@ mkdir -p "$CONF"
 create_symlink "$DOT/sheldon" "$CONF/sheldon"
 create_symlink "$DOT/wezterm" "$CONF/wezterm"
 create_symlink "$DOT/starship.toml" "$CONF/starship.toml"
+# setup sheldon
+curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh \
+    | bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
+
+# setup starhip
+curl -sS https://starship.rs/install.sh | sh
+
+# setup fzf
+sudo apt install -y fzf
+

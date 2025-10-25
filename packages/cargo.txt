@@ -1,0 +1,4 @@
+ripgrep
+bat
+fd-find
+eza

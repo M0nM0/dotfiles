@@ -1,0 +1,33 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- link:
+    ~/.zshrc:
+      path: zsh/.zshrc
+    ~/.tmux:
+      path: tmux
+    ~/.tmux.conf:
+      path: tmux/.tmux.conf
+    ~/.fzf.zsh:
+      path: fzf/.fzf.zsh
+    ~/.gitconfig:
+      path: .gitconfig
+    ~/.latexindent.yaml:
+      path: latex/.latexindent.yaml
+    ~/.config/sheldon:
+      path: sheldon
+    ~/.config/wezterm:
+      path: wezterm
+    ~/.config/starship.toml:
+      path: starship.toml
+
+- create:
+    - ~/.config
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - ["[ ! -d tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm || true", Installing tpm]

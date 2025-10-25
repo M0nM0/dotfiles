@@ -1,0 +1,17 @@
+# バージョンマネージャー
+pyenv
+nodenv
+rbenv
+goenv
+
+# 開発ツール
+neovim
+tmux
+git
+curl
+
+# CLI ツール
+gh
+ghq
+lazygit
+starship
