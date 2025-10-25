@@ -66,6 +66,9 @@ apply = ["defer"]
 [plugins.zsh-autocomplete]
 github = "marlonrichert/zsh-autocomplete"
 
+[plugins.cclog]
+github = "choplin/cclog"
+
 #[plugins.starship]
 #github = "starship/starship"
 
