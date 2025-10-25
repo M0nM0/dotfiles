@@ -3,4 +3,4 @@
 	url = https://github.com/anishathalye/dotbot
 [submodule "nvim"]
 	path = nvim
-	url = https://github.com/Visha765/nvconfig
+	url = https://github.com/e0momonga/nvim
