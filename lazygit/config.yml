@@ -1,7 +1,9 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 
 customCommands:
-  - command: gmc
+  - key: t
+    command: geminicommit
     context: files
-    subprocess: true
-    key: g
+    description: "commit with Gemini AI"
+    loadingText: "generating commit message with Gemini AI"
+    output: terminal

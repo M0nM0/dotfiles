@@ -1,3 +1,8 @@
+# XDG Base Directory仕様に準拠
+# macOSでも~/.configを設定ディレクトリとして使用する
+# これによりlazygit等のツールがLinuxと同じパスを参照する
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Editor
 export EDITOR=nvim
 export VISUAL="$EDITOR"
