@@ -2,10 +2,14 @@
 export EDITOR=nvim
 export VISUAL="$EDITOR"
 
-# Homebrew
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/sbin:$PATH
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Homebrew (Mac Apple Silicon / Linux 両対応)
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+  # Mac (Apple Silicon)
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  # Linux
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # zsh
 eval "$(sheldon source)"
