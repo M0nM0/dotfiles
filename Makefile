@@ -158,7 +158,7 @@ update:
 	@if command -v cargo >/dev/null 2>&1; then cargo install-update -a; fi
 	@if command -v npm >/dev/null 2>&1; then npm update -g; fi
 	@if command -v go >/dev/null 2>&1; then $(MAKE) install-go; fi
-	@git submodule update --remote --merge
+	@git submodule update --remote --merge && git -C nvim checkout main
 	@echo "✅ All packages updated"
 
 # MCP設定の初期化

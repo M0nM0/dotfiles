@@ -4,3 +4,5 @@
 [submodule "nvim"]
 	path = nvim
 	url = https://github.com/e0momonga/nvim
+	branch = main
+	update = none
