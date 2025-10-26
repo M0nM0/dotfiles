@@ -1,7 +1,6 @@
 [user]
-	name = ez0momonga
-	email = keisuke.monma@techouse.jp
-	signingkey = ~/.ssh/id_tech_signing
+	name = e0momonga
+	email = lewis.ap75@gmail.com
 
 [alias]
 	s = status
@@ -51,7 +50,5 @@ conflictstyle = diff3
 
 [diff]
 colorMoved = default
-[commit]
-	gpgSign = true
 [gpg]
 	format = ssh

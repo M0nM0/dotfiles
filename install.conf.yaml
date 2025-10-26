@@ -2,6 +2,7 @@
     link:
       relink: true
       force: true
+      create: true
 
 - clean: ['~']
 
@@ -16,8 +17,6 @@
       path: fzf/.fzf.zsh
     ~/.gitconfig:
       path: .gitconfig
-    ~/.latexindent.yaml:
-      path: latex/.latexindent.yaml
     ~/.config/sheldon:
       path: sheldon
     ~/.config/wezterm:
@@ -27,10 +26,10 @@
     ~/.config/nvim:
       path: nvim
       force: true
-    ~/.config/git/ignore:
-      path: git/ignore
-    ~/.config/lazygit/config.yml:
-      path: lazygit/config.yml
+    ~/.config/git:
+      path: git
+    ~/.config/lazygit:
+      path: lazygit
     ~/.config/gh/config.yml:
       path: gh/config.yml
     ~/.config/karabiner:
