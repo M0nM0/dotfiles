@@ -1,0 +1,2 @@
+# Go用ツール
+github.com/tfkhdyt/geminicommit@latest

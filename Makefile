@@ -1,4 +1,4 @@
-.PHONY: install link update help install-packages install-brew install-rust install-volta install-nodejs install-brew-packages install-npm install-cargo
+.PHONY: install link update help install-packages install-brew install-rust install-volta install-nodejs install-brew-packages install-npm install-cargo install-go
 
 UNAME := $(shell uname)
 VOLTA_HOME := $(HOME)/.volta
@@ -24,7 +24,7 @@ link:
 	@./install
 
 # パッケージインストール
-install-packages: install-brew-packages install-cargo install-npm
+install-packages: install-brew-packages install-cargo install-npm install-go
 	@echo "✅ All packages installed"
 
 # Homebrewインストール
@@ -132,17 +132,32 @@ install-npm:
 		echo "⚠️  npm not found. Run: make install-volta && make install-nodejs"; \
 	fi
 
+# Goパッケージインストール（冪等性保証）
+install-go:
+	@echo "📦 Installing go packages..."
+	@if command -v go >/dev/null 2>&1; then \
+		while IFS= read -r package; do \
+			[ -z "$$package" ] && continue; \
+			echo "$$package" | grep -q '^#' && continue; \
+			if go list -m "$${package%%@*}" >/dev/null 2>&1; then \
+				echo "  ✓ $$package (already installed)"; \
+			else \
+				echo "  + Installing $$package..."; \
+				go install "$$package" || true; \
+			fi; \
+		done < packages/go.txt; \
+		echo "✅ Go packages installed"; \
+	else \
+		echo "⚠️  go not found. Run: make install-golang"; \
+	fi
+
 # 全更新
 update:
 	@echo "🔄 Updating all packages..."
 	@brew update && brew upgrade
-	@if command -v cargo >/dev/null 2>&1; then \
-		if ! command -v cargo-install-update >/dev/null 2>&1; then \
-			cargo install cargo-update; \
-		fi; \
-		cargo install-update -a; \
-	fi
+	@if command -v cargo >/dev/null 2>&1; then cargo install-update -a; fi
 	@if command -v npm >/dev/null 2>&1; then npm update -g; fi
+	@if command -v go >/dev/null 2>&1; then $(MAKE) install-go; fi
 	@git submodule update --remote --merge
 	@echo "✅ All packages updated"
 

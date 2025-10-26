@@ -1,11 +1,7 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 
 customCommands:
-  - command: czg
+  - command: gmc
     context: files
     subprocess: true
-    key: c
-  - command: czg ai
-    context: files
-    subprocess: true
-    key: C
+    key: g
