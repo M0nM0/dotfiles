@@ -5,6 +5,10 @@ VOLTA_HOME := $(HOME)/.volta
 CARGO_HOME := $(HOME)/.cargo
 SHELL_PATH := $(VOLTA_HOME)/bin:$(CARGO_HOME)/bin:$(PATH)
 
+# PATH設定（make実行中に有効）
+# 両方のbrewパスを追加（存在しないパスは自動的に無視される）
+export PATH := /opt/homebrew/bin:$(HOME)/.linuxbrew/bin:$(HOME)/.cargo/bin:$(HOME)/.volta/bin:$(PATH)
+
 help:
 	@echo "Available commands:"
 	@echo "  make install           - 初回セットアップ（全自動）"
@@ -13,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: install-brew install-rust install-volta install-nodejs install-packages link
+install: link install-brew install-rust install-volta install-nodejs install-packages
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -29,15 +33,24 @@ install-packages: install-brew-packages install-cargo install-npm install-go
 
 # Homebrewインストール
 install-brew:
-	@if ! command -v brew >/dev/null 2>&1; then \
-		echo "📦 Installing Homebrew..."; \
-		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
-		if [ "$(UNAME)" = "Linux" ]; then \
-			echo 'eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc; \
-			eval "$$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; \
+	@if [ "$(UNAME)" = "Linux" ]; then \
+		if [ ! -f "$$HOME/.linuxbrew/bin/brew" ]; then \
+			echo "📦 Installing Homebrew to $$HOME/.linuxbrew..."; \
+			mkdir -p "$$HOME/.linuxbrew"; \
+			curl -L https://github.com/Homebrew/brew/tarball/main | tar xz --strip-components 1 -C "$$HOME/.linuxbrew"; \
+			echo 'eval "$$($$HOME/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc; \
+			echo "✅ Homebrew installed"; \
+		else \
+			echo "✅ Homebrew already installed at $$HOME/.linuxbrew"; \
 		fi; \
 	else \
-		echo "✅ Homebrew already installed"; \
+		if ! command -v brew >/dev/null 2>&1; then \
+			echo "📦 Installing Homebrew..."; \
+			curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash; \
+			echo "✅ Homebrew installed"; \
+		else \
+			echo "✅ Homebrew already installed"; \
+		fi; \
 	fi
 
 # Rustインストール（rustup経由）

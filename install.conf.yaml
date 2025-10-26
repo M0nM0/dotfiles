@@ -33,8 +33,8 @@
       path: lazygit/config.yml
     ~/.config/gh/config.yml:
       path: gh/config.yml
-    ~/.config/karabiner/karabiner.json:
-      path: karabiner/karabiner.json
+    ~/.config/karabiner:
+      path: karabiner
     ~/.config/direnv:
       path: direnv
     ~/.envrc:
