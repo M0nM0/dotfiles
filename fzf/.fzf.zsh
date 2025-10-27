@@ -164,4 +164,17 @@ fdimgrm() {
   [ -n "$cid" ] && echo $cid | xargs docker image rm -f
 }
 
+# fzfでtmuxセッションを選択してattach
+fta() {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | \
+    fzf --prompt="Tmux Session> " \
+        --preview 'tmux list-windows -t {}' \
+        --preview-window=right:60%)
+
+  if [ -n "$session" ]; then
+    tmux attach -t "$session"
+  fi
+}
+
 
