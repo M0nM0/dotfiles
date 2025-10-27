@@ -246,8 +246,9 @@ make install-nodejs
 5. **Volta インストール**
 6. **Node.js LTS（Volta経由）インストール**
 7. **brewパッケージインストール**（pyenv, rbenv, goenv, neovim等）
-8. **cargoパッケージインストール**（ripgrep, bat等、`--locked`フラグ付き）
+8. **cargoパッケージインストール**（`--locked`フラグ付き）
 9. **npmパッケージインストール**（claude-code, gemini-cli等）
+10. **goパッケージインストール**
 
 ## 🔄 更新手順
 
@@ -256,10 +257,3 @@ make install-nodejs
 make update
 ```
 
-## 📄 ライセンス
-
-MIT
-
-## 🤝 コントリビューション
-
-Issue・PRお待ちしています！
