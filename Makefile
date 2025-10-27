@@ -86,6 +86,7 @@ install-nodejs:
 		echo "📦 Installing Node.js LTS with Volta..."; \
 		volta install node; \
 		volta install npm; \
+		volta install yarn; \
 		echo "✅ Node.js LTS installed"; \
 	else \
 		echo "✅ Node.js already installed ($$(node --version))"; \
