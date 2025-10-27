@@ -82,14 +82,14 @@ install-nodejs:
 		echo "⚠️  Volta not found. Run: make install-volta"; \
 		exit 1; \
 	fi; \
-	if ! command -v node >/dev/null 2>&1; then \
+	if [ -f "$$HOME/.volta/bin/node" ]; then \
+		echo "✅ Node.js already installed via Volta ($$($$HOME/.volta/bin/node --version))"; \
+	else \
 		echo "📦 Installing Node.js LTS with Volta..."; \
 		volta install node; \
 		volta install npm; \
 		volta install yarn; \
 		echo "✅ Node.js LTS installed"; \
-	else \
-		echo "✅ Node.js already installed ($$(node --version))"; \
 	fi
 
 # Homebrewパッケージインストール（冪等性保証）
