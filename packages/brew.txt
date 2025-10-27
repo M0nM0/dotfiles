@@ -18,3 +18,4 @@ starship
 jq
 direnv
 gettext
+xclip

@@ -15,6 +15,7 @@
 
 - Git
 - Make（通常プリインストール済み）
+- **Linux環境**: sudo権限（Homebrewインストールに必要）
 
 ## 🚀 クイックスタート
 
@@ -22,6 +23,7 @@
 git clone <your-repo-url> ~/dotfiles
 cd ~/dotfiles
 make install
+# Linux環境: Homebrewインストール時にパスワード入力を求められます
 ```
 
 セットアップ後、シェルを再起動：
@@ -198,14 +200,14 @@ make mcp-sync
 
 ### Linuxでbrewが見つからない
 
+`make install` を実行すると自動的に `/home/linuxbrew/.linuxbrew` にインストールされます。
+
+手動でインストールする場合:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-その後、シェル設定に追加:
-```bash
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
-```
+**注意**: Linux環境では sudo権限が必要です。インストール中にパスワード入力を求められます。
 
 ### シンボリックリンクの問題
 
@@ -237,14 +239,15 @@ make install-nodejs
 
 ## 📝 セットアップフロー
 
-1. **Homebrewインストール**（未インストール時）
-2. **Rust（rustup）インストール**
-3. **Volta インストール**
-4. **Node.js LTS（Volta経由）インストール**
-5. **brewパッケージインストール**（pyenv, rbenv, goenv, neovim等）
-6. **cargoパッケージインストール**（ripgrep, bat等、`--locked`フラグ付き）
-7. **npmパッケージインストール**（claude-code, gemini-cli等）
-8. **シンボリックリンク作成**（dotbot経由）
+1. **シンボリックリンク作成**（dotbot経由）
+2. **環境変数セットアップ**（.env作成 + direnv allow）
+3. **Homebrewインストール**（未インストール時、Linux環境ではsudo必要）
+4. **Rust（rustup）インストール**
+5. **Volta インストール**
+6. **Node.js LTS（Volta経由）インストール**
+7. **brewパッケージインストール**（pyenv, rbenv, goenv, neovim等）
+8. **cargoパッケージインストール**（ripgrep, bat等、`--locked`フラグ付き）
+9. **npmパッケージインストール**（claude-code, gemini-cli等）
 
 ## 🔄 更新手順
 

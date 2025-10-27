@@ -43,6 +43,7 @@
     - ~/.config
 
 - shell:
-  - [git submodule update --init --recursive --remote && git -C nvim checkout main, Installing submodules]
+  - [git submodule update --init dotbot, Installing dotbot]
+  - [git submodule update --init nvim && git -C nvim checkout main, Installing nvim]
   - ["[ ! -d tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm tmux/plugins/tpm || true", Installing tpm]
   - ["~/.tmux/plugins/tpm/bin/install_plugins", Installing tmux plugins]

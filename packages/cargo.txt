@@ -6,3 +6,4 @@ ripgrep
 bat
 fd-find
 eza
+sheldon

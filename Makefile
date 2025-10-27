@@ -6,8 +6,8 @@ CARGO_HOME := $(HOME)/.cargo
 SHELL_PATH := $(VOLTA_HOME)/bin:$(CARGO_HOME)/bin:$(PATH)
 
 # PATH設定（make実行中に有効）
-# 両方のbrewパスを追加（存在しないパスは自動的に無視される）
-export PATH := /opt/homebrew/bin:$(HOME)/.linuxbrew/bin:$(HOME)/.cargo/bin:$(HOME)/.volta/bin:$(PATH)
+# Mac/Linuxのbrewパスを追加（存在しないパスは自動的に無視される）
+export PATH := /opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:$(HOME)/.cargo/bin:$(HOME)/.volta/bin:$(PATH)
 
 help:
 	@echo "Available commands:"
@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-rust install-volta install-nodejs install-packages
+install: link install-brew install-rust install-volta install-nodejs install-packages setup-env
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -34,19 +34,18 @@ install-packages: install-brew-packages install-cargo install-npm install-go
 # Homebrewインストール
 install-brew:
 	@if [ "$(UNAME)" = "Linux" ]; then \
-		if [ ! -f "$$HOME/.linuxbrew/bin/brew" ]; then \
-			echo "📦 Installing Homebrew to $$HOME/.linuxbrew..."; \
-			mkdir -p "$$HOME/.linuxbrew"; \
-			curl -L https://github.com/Homebrew/brew/tarball/main | tar xz --strip-components 1 -C "$$HOME/.linuxbrew"; \
-			echo 'eval "$$($$HOME/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc; \
+		if ! command -v brew >/dev/null 2>&1; then \
+			echo "📦 Installing Homebrew to /home/linuxbrew/.linuxbrew..."; \
+			echo "⚠️  sudo権限が必要です。パスワード入力を求められます。"; \
+			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 			echo "✅ Homebrew installed"; \
 		else \
-			echo "✅ Homebrew already installed at $$HOME/.linuxbrew"; \
+			echo "✅ Homebrew already installed"; \
 		fi; \
 	else \
 		if ! command -v brew >/dev/null 2>&1; then \
 			echo "📦 Installing Homebrew..."; \
-			curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash; \
+			/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 			echo "✅ Homebrew installed"; \
 		else \
 			echo "✅ Homebrew already installed"; \
@@ -173,6 +172,23 @@ update:
 	@if command -v go >/dev/null 2>&1; then $(MAKE) install-go; fi
 	@git submodule update --remote --merge && git -C nvim checkout main
 	@echo "✅ All packages updated"
+
+# 環境変数セットアップ（.env + direnv）
+setup-env:
+	@echo "🔧 Setting up environment..."
+	@if [ ! -f ~/.env ]; then \
+		cp $(PWD)/.env.example ~/.env; \
+		echo "✅ Created ~/.env from .env.example"; \
+		echo "📝 Please edit ~/.env with your tokens: vim ~/.env"; \
+	else \
+		echo "✅ ~/.env already exists (skipped)"; \
+	fi
+	@if command -v direnv >/dev/null 2>&1; then \
+		cd $(PWD) && direnv allow; \
+		echo "✅ direnv allow executed"; \
+	else \
+		echo "⚠️  direnv not found. Install it with: brew install direnv"; \
+	fi
 
 # MCP設定の初期化
 mcp-init:

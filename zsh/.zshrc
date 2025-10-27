@@ -11,9 +11,9 @@ export VISUAL="$EDITOR"
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # Mac (Apple Silicon)
   eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -f "$HOME/.linuxbrew/bin/brew" ]]; then
-  # Linux (user-local)
-  eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+elif [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+  # Linux (system-wide)
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # zsh
