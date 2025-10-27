@@ -28,7 +28,7 @@ link:
 	@./install
 
 # パッケージインストール
-install-packages: install-brew-packages install-tmux-plugins install-cargo install-npm install-go
+install-packages: install-brew-packages install-cargo install-npm install-go
 	@echo "✅ All packages installed"
 
 # Homebrewインストール
@@ -106,28 +106,6 @@ install-brew-packages:
 		fi; \
 	done < packages/brew.txt
 	@echo "✅ Homebrew packages installed"
-
-# tmuxプラグインインストール（tpm経由）
-install-tmux-plugins:
-	@echo "📦 Setting up tmux plugins..."
-	@if ! command -v tmux >/dev/null 2>&1; then \
-		echo "⚠️  tmux not found. Run: make install-brew-packages"; \
-		exit 1; \
-	fi
-	@if [ ! -L ~/.tmux ]; then \
-		echo "⚠️  ~/.tmux symlink not found. Run: ./install first"; \
-		exit 1; \
-	fi
-	@if [ ! -d ~/.tmux/plugins/tpm ]; then \
-		echo "  + Cloning tpm..."; \
-		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; \
-		echo "  ✓ tpm cloned"; \
-	else \
-		echo "  ✓ tpm already exists"; \
-	fi
-	@echo "  + Installing tmux plugins..."
-	@~/.tmux/plugins/tpm/bin/install_plugins
-	@echo "✅ Tmux plugins installed"
 
 # cargoパッケージインストール（冪等性保証）
 install-cargo:
