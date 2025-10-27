@@ -19,3 +19,9 @@ jq
 direnv
 gettext
 xclip
+ripgrep
+bat
+fd
+eza
+sheldon
+git-delta

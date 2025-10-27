@@ -1,9 +1,2 @@
 # パッケージマネージャー
 cargo-update
-
-# CLI ツール
-ripgrep
-bat
-fd-find
-eza
-sheldon
