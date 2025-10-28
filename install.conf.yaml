@@ -15,8 +15,6 @@
       path: tmux/.tmux.conf
     ~/.fzf.zsh:
       path: fzf/.fzf.zsh
-    ~/.gitconfig:
-      path: .gitconfig
     ~/.config/sheldon:
       path: sheldon
     ~/.config/wezterm:

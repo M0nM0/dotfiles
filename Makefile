@@ -1,4 +1,4 @@
-.PHONY: install link update help install-packages install-brew install-rust install-volta install-nodejs install-brew-packages install-npm install-cargo install-go
+.PHONY: install link update help install-packages install-brew install-rust install-volta install-nodejs install-brew-packages install-npm install-cargo install-go setup-git
 
 UNAME := $(shell uname)
 VOLTA_HOME := $(HOME)/.volta
@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-rust install-volta install-nodejs install-packages setup-env
+install: link install-brew install-rust install-volta install-nodejs install-packages setup-env setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -213,3 +213,16 @@ mcp-init:
 # MCP設定の同期
 mcp-sync:
 	@./mcp/scripts/sync-mcp.sh
+
+# Git個人設定
+setup-git:
+	@if [ ! -f ~/.gitconfig ]; then \
+		cp $(PWD)/.gitconfig.template ~/.gitconfig; \
+		echo "✅ Created ~/.gitconfig"; \
+		echo ""; \
+		echo "📝 Set your git config:"; \
+		echo "   git config --global user.name 'Your Name'"; \
+		echo "   git config --global user.email 'your@email.com'"; \
+	else \
+		echo "✅ ~/.gitconfig already exists (skipped)"; \
+	fi

@@ -1,0 +1,8 @@
+[gpg]
+	format = ssh
+
+[user]
+	# Set your information with:
+	# git config --global user.name "Your Name"
+	# git config --global user.email "your@email.com"
+	# git config --global user.signingkey "path/to/signing/key"
