@@ -2,6 +2,7 @@
 pyenv
 rbenv
 goenv
+sheldon
 
 # 開発ツール
 neovim
@@ -10,10 +11,13 @@ git
 curl
 uv
 
-# CLI ツール
+# Gitツール
 gh
 ghq
 lazygit
+git-delta
+
+# CLI ツール
 starship
 jq
 direnv
@@ -23,6 +27,10 @@ ripgrep
 bat
 fd
 eza
-sheldon
-git-delta
 tree
+tldr
+duf
+
+# Monitoring ツール
+bandwhich
+glances
