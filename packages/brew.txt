@@ -25,3 +25,4 @@ fd
 eza
 sheldon
 git-delta
+tree
