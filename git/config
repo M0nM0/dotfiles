@@ -1,6 +1,3 @@
-[commit]
-	gpgsign = true
-
 [alias]
 	s = status
 	ss = status -s
