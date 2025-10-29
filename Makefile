@@ -149,7 +149,7 @@ install-npm:
 		while IFS= read -r package; do \
 			[ -z "$$package" ] && continue; \
 			echo "$$package" | grep -q '^#' && continue; \
-			if npm list -g "$$package" >/dev/null 2>&1; then \
+			if volta list all | grep -q "$$package"; then \
 				echo "  ✓ $$package (already installed)"; \
 			else \
 				echo "  + Installing $$package..."; \
