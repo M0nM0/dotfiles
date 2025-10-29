@@ -1,4 +1,4 @@
-.PHONY: install link update help install-packages install-brew install-rust install-volta install-nodejs install-brew-packages install-npm install-cargo install-go setup-git
+.PHONY: install link update help install-packages install-brew install-rust install-golang install-volta install-nodejs install-brew-packages install-npm install-cargo install-go setup-git
 
 UNAME := $(shell uname)
 VOLTA_HOME := $(HOME)/.volta
@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-rust install-volta install-nodejs install-packages setup-env setup-git
+install: link install-brew install-rust install-volta install-nodejs install-packages install-golang setup-env setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -61,6 +61,22 @@ install-rust:
 		echo "✅ Rust installed"; \
 	else \
 		echo "✅ Rust already installed"; \
+	fi
+
+# Goインストール（goenv経由）
+install-golang:
+	@if ! command -v goenv >/dev/null 2>&1; then \
+		echo "⚠️  goenv not found. Run: make install-brew-packages"; \
+		exit 1; \
+	fi; \
+	if [ -d "$$HOME/.goenv/versions" ] && [ $$(ls -1 "$$HOME/.goenv/versions" 2>/dev/null | wc -l) -gt 0 ]; then \
+		echo "✅ Go already installed via goenv ($$(go version 2>/dev/null | awk '{print $$3}'))"; \
+	else \
+		echo "📦 Installing Go with goenv..."; \
+		goenv install latest; \
+		goenv global $$(goenv versions --bare | tail -1); \
+		export PATH="$$HOME/.goenv/shims:$$PATH"; \
+		echo "✅ Go installed"; \
 	fi
 
 # Voltaインストール
