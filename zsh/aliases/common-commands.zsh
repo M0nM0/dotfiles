@@ -29,6 +29,7 @@ alias du='du -h'
 alias dus='du -sh'
 
 # その他
+alias pc='pbcopy'
 alias mant='tldr'
 alias path='echo -e ${PATH//:/\\n}'
 alias now='date +"%Y-%m-%d %H:%M:%S"'
