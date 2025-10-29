@@ -34,3 +34,7 @@ duf
 # Monitoring ツール
 bandwhich
 glances
+
+# TODO: ver管理に移動
+ruby
+
