@@ -22,7 +22,6 @@ starship
 jq
 direnv
 gettext
-xclip
 ripgrep
 bat
 fd
