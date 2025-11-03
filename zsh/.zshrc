@@ -2,6 +2,8 @@
 # macOSでも~/.configを設定ディレクトリとして使用する
 # これによりlazygit等のツールがLinuxと同じパスを参照する
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # Editor
 export EDITOR=nvim
@@ -60,6 +62,10 @@ zshaddhistory() {
 
 # mise (polyglot version manager)
 eval "$(mise activate zsh)"
+
+# pnpm (global bin directory)
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+export PATH="$PNPM_HOME:$PATH"
 
 # Android Studio
 export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk

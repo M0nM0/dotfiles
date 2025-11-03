@@ -99,17 +99,9 @@ install-cargo:
 # pnpmグローバルパッケージインストール（冪等性保証）
 install-pnpm:
 	@echo "📦 Installing pnpm global packages..."
-	@if command -v pnpm >/dev/null 2>&1; then \
-		echo "  + claude-code..."; \
-		pnpm add -g @anthropic-ai/claude-code || true; \
-		echo "  + gemini-cli..."; \
-		pnpm add -g @google/gemini-cli || true; \
-		echo "  + cz-git..."; \
-		pnpm add -g cz-git || true; \
-		echo "✅ pnpm global packages installed"; \
-	else \
-		echo "⚠️  pnpm not found. Run: make install-languages"; \
-	fi
+	pnpm install -g
+	pnpm approve-builds -g
+	@echo "✅ pnpm global packages installed"
 
 # Goパッケージインストール（冪等性保証）
 install-go:

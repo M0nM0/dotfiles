@@ -1,10 +1,10 @@
 {
   "name": "dotfiles",
   "version": "1.0.0",
-  "description": "Personal dotfiles with pnpm global packages",
+  "description": "Personal dotfiles",
   "private": true,
   "packageManager": "pnpm@latest",
-  "globalDependencies": {
+  "dependencies": {
     "@anthropic-ai/claude-code": "latest",
     "@google/gemini-cli": "latest",
     "cz-git": "latest"
