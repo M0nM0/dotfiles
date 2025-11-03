@@ -1,4 +1,4 @@
-.PHONY: install link update help install-packages install-brew install-rust install-golang install-volta install-nodejs install-brew-packages install-npm install-cargo install-go setup-git
+.PHONY: install link update help install-packages install-brew install-languages install-brew-packages install-npm install-cargo install-go setup-git
 
 UNAME := $(shell uname)
 VOLTA_HOME := $(HOME)/.volta
@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-rust install-volta install-nodejs install-packages install-golang setup-env setup-git
+install: link install-brew install-brew-packages install-languages install-cargo install-npm install-go setup-env setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -52,61 +52,15 @@ install-brew:
 		fi; \
 	fi
 
-# Rustインストール（rustup経由）
-install-rust:
-	@if ! command -v cargo >/dev/null 2>&1; then \
-		echo "📦 Installing Rust (rustup)..."; \
-		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; \
-		export PATH="$$HOME/.cargo/bin:$$PATH"; \
-		echo "✅ Rust installed"; \
-	else \
-		echo "✅ Rust already installed"; \
-	fi
-
-# Goインストール（goenv経由）
-install-golang:
-	@if ! command -v goenv >/dev/null 2>&1; then \
-		echo "⚠️  goenv not found. Run: make install-brew-packages"; \
+# 言語ランタイムのインストール（mise経由）
+install-languages:
+	@if ! command -v mise >/dev/null 2>&1; then \
+		echo "⚠️  mise not found. Run: make install-brew-packages"; \
 		exit 1; \
-	fi; \
-	if [ -d "$$HOME/.goenv/versions" ] && [ $$(ls -1 "$$HOME/.goenv/versions" 2>/dev/null | wc -l) -gt 0 ]; then \
-		echo "✅ Go already installed via goenv ($$(go version 2>/dev/null | awk '{print $$3}'))"; \
-	else \
-		echo "📦 Installing Go with goenv..."; \
-		goenv install latest; \
-		goenv global $$(goenv versions --bare | tail -1); \
-		export PATH="$$HOME/.goenv/shims:$$PATH"; \
-		echo "✅ Go installed"; \
 	fi
-
-# Voltaインストール
-install-volta:
-	@if ! command -v volta >/dev/null 2>&1; then \
-		echo "📦 Installing Volta..."; \
-		curl https://get.volta.sh | bash; \
-		export VOLTA_HOME="$$HOME/.volta"; \
-		export PATH="$$VOLTA_HOME/bin:$$PATH"; \
-		echo "✅ Volta installed"; \
-	else \
-		echo "✅ Volta already installed"; \
-	fi
-
-# Node.js LTSインストール（Volta経由）
-install-nodejs:
-	@export PATH="$(SHELL_PATH)"; \
-	if ! command -v volta >/dev/null 2>&1; then \
-		echo "⚠️  Volta not found. Run: make install-volta"; \
-		exit 1; \
-	fi; \
-	if [ -f "$$HOME/.volta/bin/node" ]; then \
-		echo "✅ Node.js already installed via Volta ($$($$HOME/.volta/bin/node --version))"; \
-	else \
-		echo "📦 Installing Node.js LTS with Volta..."; \
-		volta install node; \
-		volta install npm; \
-		volta install yarn; \
-		echo "✅ Node.js LTS installed"; \
-	fi
+	@echo "📦 Installing language runtimes via mise..."
+	@mise install
+	@echo "✅ Language runtimes installed"
 
 # Homebrewパッケージインストール（冪等性保証）
 install-brew-packages:
@@ -183,10 +137,10 @@ install-go:
 # 全更新
 update:
 	@echo "🔄 Updating all packages..."
+	@mise upgrade
 	@brew update && brew upgrade
 	@if command -v cargo >/dev/null 2>&1; then cargo install-update -a; fi
 	@if command -v npm >/dev/null 2>&1; then npm update -g; fi
-	@if command -v go >/dev/null 2>&1; then $(MAKE) install-go; fi
 	@git submodule update --remote --merge && git -C nvim checkout main
 	@echo "✅ All packages updated"
 

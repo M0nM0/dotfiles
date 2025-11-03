@@ -1,7 +1,5 @@
 # バージョンマネージャー
-pyenv
-rbenv
-goenv
+mise
 sheldon
 
 # 開発ツール
@@ -9,7 +7,6 @@ neovim
 tmux
 git
 curl
-uv
 
 # Gitツール
 gh
@@ -33,7 +30,4 @@ duf
 # Monitoring ツール
 bandwhich
 glances
-
-# TODO: ver管理に移動
-ruby
 

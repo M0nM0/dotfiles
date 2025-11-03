@@ -7,7 +7,7 @@
 - 🔄 **宣言的管理**: YAMLとテキストファイルで管理
 - 🖥️ **クロスプラットフォーム**: Mac/Linux両対応
 - 📦 **統一パッケージ管理**: Homebrew統一
-- 🔧 **バージョンマネージャー統合**: pyenv, Volta, rbenv, goenv
+- 🔧 **バージョンマネージャー統合**: mise（Python, Ruby, Go, Node.js, Rust）
 - 🎨 **シェル環境**: zsh + sheldon + starship
 - 🚀 **1コマンドセットアップ**: `make install`
 
@@ -43,38 +43,29 @@ exec zsh
 
 ## 📦 管理ツール
 
-### Volta（Node.js/npmバージョン管理）⭐
+### mise（言語ランタイム統一管理）⭐
 
-- **超高速**（Rust製、nvmの40倍）
-- Node.js、npm、yarnを統一管理
-- プロジェクトごとに自動バージョン切り替え
-- `package.json`でチーム共有
+polyglot tool version manager。複数の言語ランタイムをシンプルに管理：
 
-### Rust（cargo）
+- **Python** - `latest` で常に最新版
+- **Ruby** - `latest` で常に最新版
+- **Go** - `latest` で常に最新版
+- **Node.js** - Volta の代替（`latest` 指定可能）
+- **Rust** - rustup の代替（`latest` 指定可能）
+- **uv** - Pythonパッケージマネージャー（mise で管理）
 
-- rustup経由でインストール
-- cargoパッケージ: ripgrep, bat, fd-find, eza
+設定: `.tool-versions` ファイルで一元管理
 
-### uv（Pythonパッケージマネージャー）⭐
-
-- **超高速**（Rust製、pipの10-100倍）
-- pip、poetry、pipx、virtualenvを1つに統合
-- pipと完全互換
-- pyenvと併用可能
+更新: `mise upgrade` で全言語を一括更新
 
 ### Homebrew（Mac/Linux共通）
-
-バージョンマネージャー:
-- pyenv - Pythonバージョン管理
-- rbenv - Ruby
-- goenv - Go
 
 開発ツール:
 - neovim
 - tmux
 - git
 - curl
-- uv - Pythonパッケージマネージャー
+- sheldon - zshプラグイン管理
 
 CLIツール:
 - gh - GitHub CLI
@@ -224,17 +215,14 @@ prefix + I
 ```
 （デフォルトのprefixは `Ctrl+b`）
 
-### Rust/cargoがインストールされていない
+### mise で言語ランタイムが見つからない場合
 
 ```bash
-make install-rust
-```
+# mise のインストール
+brew install mise
 
-### Volta/Node.jsがインストールされていない
-
-```bash
-make install-volta
-make install-nodejs
+# 言語ランタイムを手動でインストール
+mise install
 ```
 
 ## 📝 セットアップフロー
@@ -242,13 +230,11 @@ make install-nodejs
 1. **シンボリックリンク作成**（dotbot経由）
 2. **環境変数セットアップ**（.env作成 + direnv allow）
 3. **Homebrewインストール**（未インストール時、Linux環境ではsudo必要）
-4. **Rust（rustup）インストール**
-5. **Volta インストール**
-6. **Node.js LTS（Volta経由）インストール**
-7. **brewパッケージインストール**（pyenv, rbenv, goenv, neovim等）
-8. **cargoパッケージインストール**（`--locked`フラグ付き）
-9. **npmパッケージインストール**（claude-code, gemini-cli等）
-10. **goパッケージインストール**
+4. **mise インストール** + **言語ランタイム自動インストール**（.tool-versionsから）
+5. **Homebrewパッケージインストール**（neovim, tmux, sheldon等）
+6. **cargoパッケージインストール**（`--locked`フラグ付き）
+7. **npmグローバルパッケージインストール**（claude-code, gemini-cli等）
+8. **Goパッケージインストール**
 
 ## 🔄 更新手順
 
