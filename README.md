@@ -73,11 +73,17 @@ CLIツール:
 - lazygit - Git TUI
 - starship - シェルプロンプト
 
-### npm（グローバルパッケージ）
+### pnpm（グローバルパッケージ）
 
-- @anthropic-ai/claude-code
-- @google/gemini-cli
+pnpm でグローバルにインストールするパッケージ：
+
+- @anthropic-ai/claude-code - Claude Code CLI
+- @google/gemini-cli - Gemini CLI
 - cz-git / czg - Conventional Commits
+
+設定: `package.json` (dotfiles ルート) の `globalDependencies` で管理
+
+インストール: `make install-pnpm` で実行
 
 ### sheldon（zshプラグイン管理）
 
@@ -92,10 +98,11 @@ dotfiles/
 ├── install.conf.yaml     # シンボリックリンク設定
 ├── .env.example          # 環境変数テンプレート
 ├── .envrc                # direnv設定
+├── package.json          # pnpm グローバルパッケージ設定
 ├── packages/             # パッケージリスト
 │   ├── brew.txt         # Homebrew
-│   ├── npm.txt          # npm
-│   └── cargo.txt        # cargo
+│   ├── cargo.txt        # cargo
+│   └── go.txt           # Go (Go パッケージ)
 ├── mcp/                  # MCP設定（Claude Code + Gemini CLI）
 │   ├── conf.d/          # 設定ファイル（番号順にマージ）
 │   │   ├── 00-common.json         # 共通設定（dotfiles管理）

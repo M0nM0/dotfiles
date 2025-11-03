@@ -52,32 +52,14 @@ if type brew &>/dev/null; then
  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 fi
 
-# cargo
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # exclude unneeded history
 zshaddhistory() {
   local line="${1%%$'\n'}"
   [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
 }
 
-# pyenv
-eval "$(pyenv init -)"
-
-# Volta (Node.js version manager)
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-# goenv
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+# mise (polyglot version manager)
+eval "$(mise activate zsh)"
 
 # Android Studio
 export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk

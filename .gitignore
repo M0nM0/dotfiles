@@ -16,3 +16,6 @@ tmux/plugins/
 # 環境固有のalias設定
 zsh/aliases/local.zsh
 
+# pnpm
+node_modules/
+pnpm-lock.yaml

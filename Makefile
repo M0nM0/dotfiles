@@ -1,4 +1,4 @@
-.PHONY: install link update help install-packages install-brew install-languages install-brew-packages install-npm install-cargo install-go setup-git
+.PHONY: install link update help install-packages install-brew install-languages install-brew-packages install-pnpm install-cargo install-go setup-git
 
 UNAME := $(shell uname)
 VOLTA_HOME := $(HOME)/.volta
@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-brew-packages install-languages install-cargo install-npm install-go setup-env setup-git
+install: link install-brew install-brew-packages install-languages install-pnpm install-cargo install-go setup-env setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -28,7 +28,7 @@ link:
 	@./install
 
 # パッケージインストール
-install-packages: install-brew-packages install-cargo install-npm install-go
+install-packages: install-brew-packages install-cargo install-pnpm install-go
 	@echo "✅ All packages installed"
 
 # Homebrewインストール
@@ -96,23 +96,19 @@ install-cargo:
 		echo "⚠️  cargo not found. Run: make install-rust"; \
 	fi
 
-# npmグローバルパッケージインストール（冪等性保証）
-install-npm:
-	@echo "📦 Installing npm global packages..."
-	@if command -v npm >/dev/null 2>&1; then \
-		while IFS= read -r package; do \
-			[ -z "$$package" ] && continue; \
-			echo "$$package" | grep -q '^#' && continue; \
-			if volta list all | grep -q "$$package"; then \
-				echo "  ✓ $$package (already installed)"; \
-			else \
-				echo "  + Installing $$package..."; \
-				npm install -g "$$package" || true; \
-			fi; \
-		done < packages/npm.txt; \
-		echo "✅ npm packages installed"; \
+# pnpmグローバルパッケージインストール（冪等性保証）
+install-pnpm:
+	@echo "📦 Installing pnpm global packages..."
+	@if command -v pnpm >/dev/null 2>&1; then \
+		echo "  + claude-code..."; \
+		pnpm add -g @anthropic-ai/claude-code || true; \
+		echo "  + gemini-cli..."; \
+		pnpm add -g @google/gemini-cli || true; \
+		echo "  + cz-git..."; \
+		pnpm add -g cz-git || true; \
+		echo "✅ pnpm global packages installed"; \
 	else \
-		echo "⚠️  npm not found. Run: make install-volta && make install-nodejs"; \
+		echo "⚠️  pnpm not found. Run: make install-languages"; \
 	fi
 
 # Goパッケージインストール（冪等性保証）
