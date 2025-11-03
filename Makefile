@@ -99,8 +99,9 @@ install-cargo:
 # pnpmグローバルパッケージインストール（冪等性保証）
 install-pnpm:
 	@echo "📦 Installing pnpm global packages..."
-	pnpm install -g
-	pnpm approve-builds -g
+	@while read -r pkg; do \
+		[ -n "$$pkg" ] && pnpm add -g "$$pkg@latest" --dangerously-allow-all-builds; \
+	done < pnpm-packages.txt
 	@echo "✅ pnpm global packages installed"
 
 # Goパッケージインストール（冪等性保証）
