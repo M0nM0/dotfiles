@@ -169,8 +169,10 @@ fta() {
   local session
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | \
     fzf --prompt="Tmux Session> " \
+        --header='Enter: attach | Ctrl-X: kill session' \
         --preview 'tmux list-windows -t {}' \
-        --preview-window=right:60%)
+        --preview-window=right:60% \
+        --bind 'ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions -F "#{session_name}" 2>/dev/null)')
 
   if [ -n "$session" ]; then
     tmux attach -t "$session"
