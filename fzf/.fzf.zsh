@@ -177,4 +177,16 @@ fta() {
   fi
 }
 
+# fzfでSSH接続先を選択して接続
+fssh() {
+  local host
+  host=$(awk '/^Host / && !/[*?]/ {for(i=2;i<=NF;i++) print $i}' ~/.ssh/config 2>/dev/null | \
+    sort -u | \
+    fzf --prompt='SSH> ' \
+        --preview 'awk -v host={} '\''BEGIN{p=0} /^Host /{if(match($0, "\\<"host"\\>")){p=1}else if(/^Host /){p=0}} p'\'' ~/.ssh/config' \
+        --preview-window=right:60%)
+
+  [ -n "$host" ] && ssh "$host"
+}
+
 
