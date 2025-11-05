@@ -183,7 +183,7 @@ fssh() {
   host=$(awk '/^Host / && !/[*?]/ {for(i=2;i<=NF;i++) print $i}' ~/.ssh/config 2>/dev/null | \
     sort -u | \
     fzf --prompt='SSH> ' \
-        --preview 'awk -v host={} '\''BEGIN{p=0} /^Host /{if(match($0, "\\<"host"\\>")){p=1}else if(/^Host /){p=0}} p'\'' ~/.ssh/config' \
+        --preview 'awk -v h={} '\''/^Host /{t=0;for(i=2;i<=NF;i++)if($i==h)t=1;if(t){b=1;print;next}else if(b)exit}b{print}'\'' ~/.ssh/config' \
         --preview-window=right:60%)
 
   [ -n "$host" ] && ssh "$host"
