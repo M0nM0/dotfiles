@@ -19,6 +19,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # grep系 - カラー表示
+alias gr='grep --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
