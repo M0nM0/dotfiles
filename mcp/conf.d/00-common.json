@@ -27,12 +27,22 @@
         "--from",
         "git+https://github.com/oraios/serena",
         "serena-mcp-server",
+        "--enable-web-dashboard=false",
         "--context",
         "ide-assistant",
         "--project",
         "${MCP_PROJECT_PATH:-.}"
       ],
       "env": {}
+    },
+    "mcp-openmemory": {
+      "command": "npx",
+      "args": [
+        "@peakmojo/mcp-openmemory@latest"
+      ],
+      "env": {
+        "MEMORY_DB_PATH": "$HOME/mcp-memory.sqlite"
+      }
     },
     "mcp-remote-github": {
       "type": "stdio",
