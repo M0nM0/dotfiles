@@ -90,7 +90,7 @@ install-cargo:
 # npmグローバルパッケージインストール（冪等性保証）
 install-npm:
 	@echo "📦 Installing npm global packages..."
-	@npm install -g $$(cat npm-packages.txt | grep -v '^$$' | sed 's/$$/@latest/' | tr '\n' ' ')
+	@npm install -g $$(cat packages/npm.txt | grep -v '^$$' | sed 's/$$/@latest/' | tr '\n' ' ')
 	@echo "✅ npm global packages installed"
 
 # Goパッケージインストール（冪等性保証）
