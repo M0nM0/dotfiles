@@ -28,9 +28,9 @@ fi
 MERGED=$(jq -s 'reduce .[] as $item ({}; .mcpServers += $item.mcpServers)' \
     ~/.config/mcp/conf.d/*.json 2>/dev/null | envsubst)
 
-# Claude Code用（プロジェクトルートの.mcp.json）
-echo "$MERGED" > .mcp.json
-echo "✅ .mcp.json (Claude Code)"
+# Claude Code用（~/.mcp.json）
+echo "$MERGED" > ~/.mcp.json
+echo "✅ ~/.mcp.json (Claude Code)"
 
 # Gemini CLI用（~/.gemini/settings.json）
 if [ -f ~/.gemini/settings.json ]; then

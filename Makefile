@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-brew-packages install-languages install-pnpm install-cargo install-go setup-env setup-git
+install: link install-brew install-brew-packages install-languages install-pnpm install-cargo install-go setup-env mcp-setup setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -120,6 +120,7 @@ update:
 	@if command -v cargo >/dev/null 2>&1; then cargo install-update -a; fi
 	@if command -v npm >/dev/null 2>&1; then npm update -g; fi
 	@git submodule update --remote --merge && git -C nvim checkout main
+	@make mcp-setup
 	@echo "✅ All packages updated"
 
 # 環境変数セットアップ（.env + direnv）
@@ -139,28 +140,17 @@ setup-env:
 		echo "⚠️  direnv not found. Install it with: brew install direnv"; \
 	fi
 
-# MCP設定の初期化
-mcp-init:
-	@echo "🔧 Initializing MCP configuration..."
+# MCP設定のセットアップ（冪等）
+mcp-setup:
+	@echo "🔧 Setting up MCP configuration..."
 	@mkdir -p ~/.config/mcp/conf.d
-	@if [ ! -f ~/.env ]; then \
-		cp $(PWD)/.env.example ~/.env; \
-		echo "📝 Created ~/.env - Please edit with your tokens"; \
-		echo "   vim ~/.env"; \
-	else \
-		echo "✅ ~/.env already exists"; \
-	fi
 	@ln -sf $(PWD)/mcp/conf.d/00-common.json ~/.config/mcp/conf.d/00-common.json
-	@echo "✅ MCP initialized"
-	@echo ""
-	@echo "Next steps:"
-	@echo "  1. Edit ~/.env with your tokens: vim ~/.env"
-	@echo "  2. Allow direnv: direnv allow"
-	@echo "  3. Sync MCP config: make mcp-sync"
-
-# MCP設定の同期
-mcp-sync:
+	@if [ ! -f ~/.env ]; then \
+		echo "⚠️  ~/.env not found. Run: make setup-env"; \
+		exit 1; \
+	fi
 	@./mcp/scripts/sync-mcp.sh
+	@echo "✅ MCP setup complete (~/.mcp.json generated)"
 
 # Git個人設定
 setup-git:
