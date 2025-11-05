@@ -63,10 +63,6 @@ zshaddhistory() {
 # mise (polyglot version manager)
 eval "$(mise activate zsh)"
 
-# pnpm (global bin directory)
-export PNPM_HOME="$XDG_DATA_HOME/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
 # Android Studio
 export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk
 export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH

@@ -87,13 +87,11 @@ install-cargo:
 		echo "⚠️  cargo not found. Run: make install-rust"; \
 	fi
 
-# pnpmグローバルパッケージインストール（冪等性保証）
-install-pnpm:
-	@echo "📦 Installing pnpm global packages..."
-	@while read -r pkg; do \
-		[ -n "$$pkg" ] && pnpm add -g "$$pkg@latest" --dangerously-allow-all-builds; \
-	done < pnpm-packages.txt
-	@echo "✅ pnpm global packages installed"
+# npmグローバルパッケージインストール（冪等性保証）
+install-npm:
+	@echo "📦 Installing npm global packages..."
+	@npm install -g $$(cat npm-packages.txt | grep -v '^$$' | sed 's/$$/@latest/' | tr '\n' ' ')
+	@echo "✅ npm global packages installed"
 
 # Goパッケージインストール（冪等性保証）
 install-go:
