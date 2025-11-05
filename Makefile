@@ -65,7 +65,16 @@ install-languages:
 # Homebrewパッケージインストール（冪等性保証）
 install-brew-packages:
 	@echo "📦 Installing Homebrew packages..."
-	@brew install $$(grep -v '^#' packages/brew.txt | grep -v '^$$' | tr '\n' ' ') || true
+	@while IFS= read -r package; do \
+		[ -z "$$package" ] && continue; \
+		echo "$$package" | grep -q '^#' && continue; \
+		if brew list --formula | grep -q "^$$package$$"; then \
+			echo "  ✓ $$package (already installed)"; \
+		else \
+			echo "  + Installing $$package..."; \
+			brew install "$$package" || true; \
+		fi; \
+	done < packages/brew.txt
 	@echo "✅ Homebrew packages installed"
 
 # cargoパッケージインストール（冪等性保証）
