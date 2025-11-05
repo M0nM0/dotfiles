@@ -36,6 +36,8 @@
       path: direnv
     ~/.envrc:
       path: .envrc
+    ~/.tool-versions:
+      path: .tool-versions
 
 - create:
     - ~/.config
