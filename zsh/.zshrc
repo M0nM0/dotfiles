@@ -60,9 +60,6 @@ zshaddhistory() {
   [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
 }
 
-# mise (polyglot version manager)
-eval "$(mise activate zsh)"
-
 # Android Studio
 export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk
 export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
@@ -78,6 +75,10 @@ export PATH="$HOME/.rd/bin:$PATH"
 # OpenJDK
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+
+# mise (polyglot version manager)
+# Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
+eval "$(mise activate zsh --shims)"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
