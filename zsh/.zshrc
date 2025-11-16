@@ -80,5 +80,8 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 # Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
 eval "$(mise activate zsh --shims)"
 
+# pipx (Python CLI tools manager)
+export PATH="$PATH:/Users/momonga/.local/bin"
+
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform

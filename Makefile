@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-brew-packages install-languages install-pnpm install-cargo install-go setup-env mcp-setup setup-git
+install: link install-brew install-brew-packages install-languages install-pnpm install-cargo install-go install-pipx setup-env mcp-setup setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -28,7 +28,7 @@ link:
 	@./install
 
 # パッケージインストール
-install-packages: install-brew-packages install-cargo install-pnpm install-go
+install-packages: install-brew-packages install-cargo install-pnpm install-go install-pipx
 	@echo "✅ All packages installed"
 
 # Homebrewインストール
@@ -119,6 +119,25 @@ install-go:
 		echo "✅ Go packages installed"; \
 	else \
 		echo "⚠️  go not found. Run: make install-golang"; \
+	fi
+
+# pipxパッケージインストール（冪等性保証）
+install-pipx:
+	@echo "📦 Installing pipx packages..."
+	@if command -v pipx >/dev/null 2>&1; then \
+		while IFS= read -r package; do \
+			[ -z "$$package" ] && continue; \
+			echo "$$package" | grep -q '^#' && continue; \
+			if pipx list | grep -q "package $$package"; then \
+				echo "  ✓ $$package (already installed)"; \
+			else \
+				echo "  + Installing $$package..."; \
+				pipx install "$$package" || true; \
+			fi; \
+		done < packages/pipx.txt; \
+		echo "✅ Pipx packages installed"; \
+	else \
+		echo "⚠️  pipx not found. Run: make install-brew-packages"; \
 	fi
 
 # 全更新
