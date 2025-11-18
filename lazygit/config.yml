@@ -14,3 +14,8 @@ customCommands:
     description: "commit with Gemini AI"
     loadingText: "generating commit message with Gemini AI"
     output: terminal
+
+os:
+  editPreset: 'nvim-remote'
+  edit: "nvr --remote-tab {{filename}}"
+  editAtLine: "nvr --remote-tab +{{line}} {{filename}}"
