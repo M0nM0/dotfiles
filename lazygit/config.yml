@@ -16,6 +16,6 @@ customCommands:
     output: terminal
 
 os:
-  editPreset: 'nvim-remote'
-  edit: "nvr --remote-tab {{filename}}"
-  editAtLine: "nvr --remote-tab +{{line}} {{filename}}"
+  editPreset: 'nvim'
+  edit: "nvr -l --remote {{filename}} && nvr -c 'wincmd p | close'"
+  editAtLine: "nvr -l --remote +{{line}} {{filename}} && nvr -c 'wincmd p | close'"
