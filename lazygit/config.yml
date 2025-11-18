@@ -16,6 +16,5 @@ customCommands:
     output: terminal
 
 os:
-  editPreset: 'nvim'
-  edit: "nvr -l --remote {{filename}} && nvr -c 'wincmd p | close'"
-  editAtLine: "nvr -l --remote +{{line}} {{filename}} && nvr -c 'wincmd p | close'"
+  edit: '[ -n "$NVIM" ] && nvr -l --remote {{filename}} && nvr -c "wincmd p | close" || $EDITOR {{filename}}'
+  editAtLine: '[ -n "$NVIM" ] && nvr -l --remote +{{line}} {{filename}} && nvr -c "wincmd p | close" || $EDITOR +{{line}} {{filename}}'
