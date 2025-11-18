@@ -9,6 +9,16 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export EDITOR=nvim
 export VISUAL="$EDITOR"
 
+# History settings
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY          # 複数タブ間で履歴を即座に共有
+setopt HIST_IGNORE_ALL_DUPS   # 重複したコマンドを履歴に追加しない
+setopt HIST_FIND_NO_DUPS      # 履歴検索時に重複を表示しない
+setopt HIST_REDUCE_BLANKS     # 余分な空白を削除して履歴に保存
+setopt HIST_SAVE_NO_DUPS      # 保存時に重複を削除
+
 # Homebrew (Mac Apple Silicon / Linux 両対応)
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # Mac (Apple Silicon)
