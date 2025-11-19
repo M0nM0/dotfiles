@@ -78,20 +78,11 @@ export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 # opam configuration
 test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null || true
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$HOME/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
-# OpenJDK
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+# pipx (Python CLI tools manager)
+export PATH="$PATH:/Users/momonga/.local/bin"
 
 # mise (polyglot version manager)
 # Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
 eval "$(mise activate zsh --shims)"
+eval "$(mise activate zsh)"
 
-# pipx (Python CLI tools manager)
-export PATH="$PATH:/Users/momonga/.local/bin"
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
