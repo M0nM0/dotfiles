@@ -79,7 +79,7 @@ export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null || true
 
 # pipx (Python CLI tools manager)
-export PATH="$PATH:/Users/momonga/.local/bin"
+export PATH="$PATH:$HOME.local/bin"
 
 # mise (polyglot version manager)
 # Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
