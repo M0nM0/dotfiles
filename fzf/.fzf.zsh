@@ -179,6 +179,9 @@ fta() {
   fi
 }
 
+zle -N fta
+bindkey '^T' fta
+
 # fzfでSSH接続先を選択して接続
 fssh() {
   local host
@@ -191,4 +194,6 @@ fssh() {
   [ -n "$host" ] && ssh "$host"
 }
 
+zle -N fssh
+bindkey '^S' fssh
 
