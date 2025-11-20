@@ -19,6 +19,8 @@
 	rs = restore
 	rsst = restore --staged
 	r = reset
+  st = stash
+  sta = stash apply
 
 [init]
 	defaultBranch = main
