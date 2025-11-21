@@ -164,23 +164,36 @@ fdimgrm() {
   [ -n "$cid" ] && echo $cid | xargs docker image rm -f
 }
 
-# fzfでtmuxセッションを選択してattach
-fta() {
-  local session
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | \
+# fzfでtmuxセッションを選択する共通関数
+__fzf_select_tmux_session() {
+  tmux list-sessions -F "#{session_name}" 2>/dev/null | \
     fzf --prompt="Tmux Session> " \
         --header='Enter: attach | Ctrl-X: kill session' \
         --preview 'tmux list-windows -t {}' \
         --preview-window=right:60% \
-        --bind 'ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions -F "#{session_name}" 2>/dev/null)')
+        --bind 'ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions -F "#{session_name}" 2>/dev/null)'
+}
 
+# fzfでtmuxセッションを選択してattach
+fta() {
+  local session
+  session=$(__fzf_select_tmux_session)
   if [ -n "$session" ]; then
     tmux attach -t "$session"
   fi
 }
 
-zle -N fta
-bindkey '^T' fta
+# Ctrl-T用のwidget関数
+fzf-tmux-attach-widget() {
+  local session
+  session=$(__fzf_select_tmux_session)
+  if [ -n "$session" ]; then
+    BUFFER="tmux attach -t $session"
+    zle accept-line
+  else
+    zle redisplay
+  fi
+}
 
 # fzfでSSH接続先を選択して接続
 fssh() {
