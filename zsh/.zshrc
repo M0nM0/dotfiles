@@ -84,5 +84,4 @@ export PATH="$PATH:$HOME.local/bin"
 # mise (polyglot version manager)
 # Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
 eval "$(mise activate zsh --shims)"
-eval "$(mise activate zsh)"
 
