@@ -212,6 +212,18 @@ local keys = {
          timemout_miliseconds = 1000,
       }),
    },
+   -- rename tab
+   {
+      key = 'r',
+      mods = 'LEADER',
+      action = act.EmitEvent('tabs.manual-update-tab-title'),
+   },
+   -- show tab navigator
+   {
+      key = 'w',
+      mods = 'LEADER',
+      action = act.ShowTabNavigator,
+   },
 }
 
 -- stylua: ignore
@@ -245,7 +257,7 @@ local mouse_bindings = {
 return {
    disable_default_key_bindings = true,
    -- disable_default_mouse_bindings = true,
-   leader = { key = 'j', mods = mod.SUPER, timeout_milliseconds = 1000 },
+   leader = { key = 'j', mods = mod.SUPER, timeout_milliseconds = 3000 },
    keys = keys,
    key_tables = key_tables,
    mouse_bindings = mouse_bindings,
