@@ -82,29 +82,30 @@ local TITLE_INSET = {
 }
 
 local RENDER_VARIANTS = {
-   { 'scircle_left', 'title', 'padding', 'scircle_right' },
-   { 'scircle_left', 'title', 'unseen_output', 'padding', 'scircle_right' },
-   { 'scircle_left', 'admin', 'title', 'padding', 'scircle_right' },
-   { 'scircle_left', 'admin', 'title', 'unseen_output', 'padding', 'scircle_right' },
-   { 'scircle_left', 'wsl', 'title', 'padding', 'scircle_right' },
-   { 'scircle_left', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
+   { 'scircle_left', 'tab_number', 'title', 'padding', 'scircle_right' },
+   { 'scircle_left', 'tab_number', 'title', 'unseen_output', 'padding', 'scircle_right' },
+   { 'scircle_left', 'tab_number', 'admin', 'title', 'padding', 'scircle_right' },
+   { 'scircle_left', 'tab_number', 'admin', 'title', 'unseen_output', 'padding', 'scircle_right' },
+   { 'scircle_left', 'tab_number', 'wsl', 'title', 'padding', 'scircle_right' },
+   { 'scircle_left', 'tab_number', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
 }
 
 
 ---@type table<string, Cells.SegmentColors>
 -- stylua: ignore
+-- Modern & Minimal color scheme inspired by iTerm and Tokyo Night
 local colors = {
-   text_default          = { bg = '#45475A', fg = '#1C1B19' },
-   text_hover            = { bg = '#5D87A3', fg = '#1C1B19' },
-   text_active           = { bg = '#74c7ec', fg = '#11111B' },
+   text_default          = { bg = 'rgba(52, 58, 70, 0.75)', fg = '#a9b1d6' },
+   text_hover            = { bg = 'rgba(68, 75, 95, 0.85)', fg = '#c0caf5' },
+   text_active           = { bg = 'rgba(122, 162, 247, 0.90)', fg = '#1a1b26' },
 
-   unseen_output_default = { bg = '#45475A', fg = '#FFA066' },
-   unseen_output_hover   = { bg = '#5D87A3', fg = '#FFA066' },
-   unseen_output_active  = { bg = '#74c7ec', fg = '#FFA066' },
+   unseen_output_default = { bg = 'rgba(52, 58, 70, 0.75)', fg = '#ff9e64' },
+   unseen_output_hover   = { bg = 'rgba(68, 75, 95, 0.85)', fg = '#ff9e64' },
+   unseen_output_active  = { bg = 'rgba(122, 162, 247, 0.90)', fg = '#db4b4b' },
 
-   scircle_default       = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#45475A' },
-   scircle_hover         = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#5D87A3' },
-   scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#74C7EC' },
+   scircle_default       = { bg = 'rgba(26, 27, 38, 0.50)', fg = 'rgba(52, 58, 70, 0.75)' },
+   scircle_hover         = { bg = 'rgba(26, 27, 38, 0.50)', fg = 'rgba(68, 75, 95, 0.85)' },
+   scircle_active        = { bg = 'rgba(26, 27, 38, 0.50)', fg = 'rgba(122, 162, 247, 0.90)' },
 }
 
 ---
@@ -126,7 +127,7 @@ local function create_title(process_name, base_title, max_width, inset)
    local title
 
    if process_name:len() > 0 then
-      title = process_name .. ' ~ ' .. base_title
+      title = process_name
    else
       title = base_title
    end
@@ -236,6 +237,7 @@ function Tab:create_cells()
    local attr = self.cells.attr
    self.cells
       :add_segment('scircle_left', GLYPH_SCIRCLE_LEFT)
+      :add_segment('tab_number', ' 1 ')
       :add_segment('admin', ' ' .. GLYPH_ADMIN)
       :add_segment('wsl', ' ' .. GLYPH_LINUX)
       :add_segment('title', ' ', nil, attr(attr.intensity('Bold')))
@@ -278,6 +280,7 @@ function Tab:update_cells(event_opts, is_active, hover)
 
    self.cells
       :update_segment_colors('scircle_left', colors['scircle_' .. tab_state])
+      :update_segment_colors('tab_number', colors['text_' .. tab_state])
       :update_segment_colors('admin', colors['text_' .. tab_state])
       :update_segment_colors('wsl', colors['text_' .. tab_state])
       :update_segment_colors('title', colors['text_' .. tab_state])
@@ -357,10 +360,12 @@ M.setup = function(opts)
          tab_list[tab.tab_id] = Tab:new()
          tab_list[tab.tab_id]:set_info(valid_opts, tab, max_width)
          tab_list[tab.tab_id]:create_cells()
+         tab_list[tab.tab_id].cells:update_segment_text('tab_number', ' ' .. (tab.tab_index + 1) .. ' ')
          return tab_list[tab.tab_id]:render()
       end
 
       tab_list[tab.tab_id]:set_info(valid_opts, tab, max_width)
+      tab_list[tab.tab_id].cells:update_segment_text('tab_number', ' ' .. (tab.tab_index + 1) .. ' ')
       tab_list[tab.tab_id]:update_cells(valid_opts, tab.is_active, hover)
       return tab_list[tab.tab_id]:render()
    end)

@@ -1,6 +1,7 @@
 local gpu_adapters = require('utils.gpu-adapter')
 local backdrops = require('utils.backdrops')
 local colors = require('colors.custom')
+local fonts = require('config.fonts')
 
 return {
    max_fps = 120,
@@ -46,10 +47,10 @@ return {
    enable_tab_bar = true,
    hide_tab_bar_if_only_one_tab = true,
    -- TODO: tab barを透明にする
-   use_fancy_tab_bar = false,
-   tab_max_width = 25,
+   use_fancy_tab_bar = true,
+   tab_min_width = 25,
    -- tab_bar_at_bottom = true,
-   show_tab_index_in_tab_bar = false,
+   show_tab_index_in_tab_bar = true,
    switch_to_last_active_tab_when_closing_tab = true,
 
    -- window
@@ -63,13 +64,9 @@ return {
    window_close_confirmation = 'NeverPrompt',
    window_frame = {
       active_titlebar_bg = '#090909',
-      -- font = fonts.font,
-      -- font_size = fonts.font_size,
+      font = fonts.font,
+      font_size = 11.0,
    },
-   -- inactive_pane_hsb = {
-   --    saturation = 0.9,
-   --    brightness = 0.65,
-   -- },
    inactive_pane_hsb = {
       saturation = 1,
       brightness = 1,
