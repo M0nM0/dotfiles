@@ -20,7 +20,7 @@ return {
 
    -- color scheme
    -- colors = colors, -- use colors.custom
-   color_scheme = 'Github Dark',
+   color_scheme = 'GitHub Dark',
    -- color_scheme = 'Adventure',
 
    -- bold text brightness
