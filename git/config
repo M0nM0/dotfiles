@@ -49,5 +49,3 @@
 [diff]
 	colorMoved = default
 
-[gpg]
-	format = ssh
