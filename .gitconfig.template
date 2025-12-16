@@ -1,5 +1,5 @@
 [gpg]
-	format = ssh
+	# format = ssh
 
 [user]
 	# Set your information with:
