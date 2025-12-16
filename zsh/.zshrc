@@ -80,9 +80,6 @@ export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk
 export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
 export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 
-# opam configuration
-test -r "$HOME/.opam/opam-init/init.zsh" && . "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>/dev/null || true
-
 # pipx (Python CLI tools manager)
 export PATH="$PATH:$HOME.local/bin"
 
