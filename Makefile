@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-brew-packages install-languages install-pnpm install-cargo install-go install-pipx setup-env mcp-setup setup-git
+install: link install-brew install-brew-packages install-languages install-npm install-cargo install-go install-pipx setup-env mcp-setup setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
