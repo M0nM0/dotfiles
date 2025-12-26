@@ -16,7 +16,7 @@ local GLOB_PATTERN = '*.{jpg,jpeg,png,gif,bmp,ico,tiff,pnm,dds,tga}'
 ---@field images string[] background images
 ---@field images_dir string directory of background images. Default is `wezterm.config_dir .. '/backdrops/'`
 ---@field focus_color string background color when in focus mode. Default is `colors.custom.background`
----@field focus_on boolean focus mode on or off
+---@field opacity_state 50|75|90|100 current opacity percentage
 local BackDrops = {}
 BackDrops.__index = BackDrops
 
@@ -28,7 +28,7 @@ function BackDrops:init()
       images = {},
       images_dir = wezterm.config_dir .. '/backdrops/',
       focus_color = colors.background,
-      focus_on = false,
+      opacity_state = 75,
    }
    local backdrops = setmetatable(inital, self)
    return backdrops
@@ -212,20 +212,34 @@ function BackDrops:set_img(window, idx)
    self:_set_opt(window, self:_create_opts())
 end
 
----Toggle the focus mode
+---Cycle through opacity: 50% → 75% → 90% → 100% → 50%
 ---@param window any WezTerm `Window` see: https://wezfurlong.org/wezterm/config/lua/window/index.html
 function BackDrops:toggle_focus(window)
-   local background_opts
-
-   if self.focus_on then
-      background_opts = self:_create_opts()
-      self.focus_on = false
-   else
-      background_opts = self:_create_focus_opts()
-      self.focus_on = true
+   local next_state
+   if self.opacity_state == 50 then
+      next_state = 75
+   elseif self.opacity_state == 75 then
+      next_state = 90
+   elseif self.opacity_state == 90 then
+      next_state = 100
+   else -- 100
+      next_state = 50
    end
 
-   self:_set_opt(window, background_opts)
+   self.opacity_state = next_state
+
+   local opts = {
+      {
+         source = { Color = colors.background },
+         height = '120%',
+         width = '120%',
+         vertical_offset = '-10%',
+         horizontal_offset = '-10%',
+         opacity = next_state / 100,
+      },
+   }
+
+   self:_set_opt(window, opts)
 end
 
 return BackDrops:init()

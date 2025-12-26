@@ -24,7 +24,8 @@ local mocha = {
    surface2  = '#585b70',
    surface1  = '#45475a',
    surface0  = '#313244',
-   base      = '#1f1f28',
+   -- base      = '#1f1f28',  -- Original catppuccin mocha (slightly blue-tinted)
+   base      = '#000000',  -- Pure black
    mantle    = '#181825',
    crust     = '#11111b',
 }
