@@ -29,7 +29,7 @@ return {
 
    -- text brightness
    foreground_text_hsb = {
-      brightness = 1.2,
+      brightness = 1.0,
    },
 
    -- background
