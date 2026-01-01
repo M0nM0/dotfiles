@@ -16,6 +16,7 @@ git-delta
 
 # CLI ツール
 starship
+fastfetch
 jq
 direnv
 gettext

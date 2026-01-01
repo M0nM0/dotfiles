@@ -34,6 +34,8 @@
       path: karabiner
     ~/.config/direnv:
       path: direnv
+    ~/.config/fastfetch:
+      path: fastfetch
     ~/.envrc:
       path: .envrc
     ~/.tool-versions:

@@ -57,6 +57,11 @@ function zvm_after_init() {
   bindkey -M viins '^W' backward-kill-word
 }
 
+# fastfetch (system information display)
+if command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi
+
 zstyle ':completion:*' completer _complete _prefix
 
 # autosuggestion
