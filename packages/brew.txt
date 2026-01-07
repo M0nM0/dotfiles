@@ -17,6 +17,7 @@ git-delta
 # CLI ツール
 starship
 fastfetch
+tmuxinator
 jq
 direnv
 gettext
@@ -29,6 +30,5 @@ tldr
 duf
 
 # Monitoring ツール
-bandwhich
 glances
 
