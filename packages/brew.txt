@@ -7,6 +7,8 @@ neovim
 tmux
 git
 curl
+claude-code
+gemini-cli
 
 # Gitツール
 gh
