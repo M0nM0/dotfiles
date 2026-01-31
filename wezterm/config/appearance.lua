@@ -4,7 +4,7 @@ local colors = require('colors.custom')
 local fonts = require('config.fonts')
 
 return {
-   max_fps = 120,
+   max_fps = 60,
    front_end = 'WebGpu',
    webgpu_power_preference = 'HighPerformance',
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
@@ -13,11 +13,11 @@ return {
    underline_thickness = '1.5pt',
 
    -- cursor
-   animation_fps = 120,
+   animation_fps = 60,
    cursor_blink_ease_in = 'EaseOut',
    cursor_blink_ease_out = 'EaseOut',
    default_cursor_style = 'SteadyBar',
-   cursor_blink_rate = 700,
+   cursor_blink_rate = 0,
 
    -- color scheme
    -- colors = colors, -- use colors.custom

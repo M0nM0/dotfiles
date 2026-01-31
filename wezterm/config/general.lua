@@ -4,7 +4,7 @@ return {
    use_ime = true, -- japanese input
    exit_behavior = 'CloseOnCleanExit', -- if the shell program exited with a successful status
    exit_behavior_messaging = 'Verbose',
-   status_update_interval = 1000,
+   status_update_interval = 5000,
 
    scrollback_lines = 20000,
 
