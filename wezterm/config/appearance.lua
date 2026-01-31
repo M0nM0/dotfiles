@@ -35,10 +35,10 @@ return {
    -- background
    -- background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
    window_background_opacity = 0.90,
-   macos_window_background_blur = 10,
+   macos_window_background_blur = 0, -- performance friendly(0)
 
    -- scrollbar
-   enable_scroll_bar = true,
+   enable_scroll_bar = false,
 
    -- title bar
    window_decorations = "RESIZE", -- "RESIZE" | "TITLE" | "NONE"
@@ -74,9 +74,9 @@ return {
 
    visual_bell = {
       fade_in_function = 'EaseIn',
-      fade_in_duration_ms = 250,
+      fade_in_duration_ms = 0,
       fade_out_function = 'EaseOut',
-      fade_out_duration_ms = 250,
+      fade_out_duration_ms = 0,
       target = 'CursorColor',
    },
 }
