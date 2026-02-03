@@ -5,20 +5,6 @@
       "command": "npx",
       "args": ["-y", "mcp-remote", "https://mcp.atlassian.com/v1/sse"],
       "env": {}
-    },
-    "mcp-atlassian": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": [
-        "mcp-atlassian",
-        "--confluence-url=${ATLASSIAN_CONFLUENCE_URL}",
-        "--confluence-username=${ATLASSIAN_USERNAME}",
-        "--confluence-token=${ATLASSIAN_TOKEN}",
-        "--jira-url=${JIRA_URL}",
-        "--jira-username=${JIRA_USERNAME}",
-        "--jira-token=${JIRA_TOKEN}"
-      ],
-      "env": {}
     }
   }
 }
