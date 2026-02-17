@@ -36,6 +36,9 @@
       path: direnv
     ~/.config/fastfetch:
       path: fastfetch
+    ~/.claude/:
+      glob: true
+      path: claude/*
     ~/.envrc:
       path: .envrc
     ~/.tool-versions:

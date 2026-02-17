@@ -6,3 +6,4 @@ rust latest
 uv latest
 pnpm latest
 pipx latest
+deno latest

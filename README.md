@@ -194,6 +194,30 @@ make mcp-sync
 
 詳細は `mcp/conf.d/README.md` を参照。
 
+### Claude Code設定
+
+Claude Codeの設定は`claude/`ディレクトリで管理します。
+
+#### 機能
+
+- **ステータスライン**: トークン使用量をリアルタイム表示（🟢 45.2K (23%)形式）
+- **通知**: 作業完了時にmacOS通知（terminal-notifier使用）
+- **グローバルルール**: CLAUDE.mdでClaude Codeの振る舞いをカスタマイズ
+
+#### 設定ファイル
+
+| ファイル | 説明 |
+|---------|------|
+| `claude/settings.json` | グローバル設定（hooks, statusLine等） |
+| `claude/CLAUDE.md` | グローバルルール |
+| `claude/statusline/statusline.ts` | ステータスライン表示スクリプト |
+| `claude/hooks/notify.ts` | 通知スクリプト |
+
+#### 依存関係
+
+- `deno` - スクリプト実行（mise経由）
+- `terminal-notifier` - macOS通知（brew経由）
+
 ## 🛠️ トラブルシューティング
 
 ### Linuxでbrewが見つからない

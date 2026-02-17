@@ -1,4 +1,4 @@
-.PHONY: install link update help install-packages install-brew install-languages install-brew-packages install-pnpm install-cargo install-go setup-git
+.PHONY: install link update help install-packages install-brew install-languages install-brew-packages install-pnpm install-cargo install-go setup-git claude-setup
 
 UNAME := $(shell uname)
 VOLTA_HOME := $(HOME)/.volta
@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-brew-packages install-languages install-npm install-cargo install-go install-pipx setup-env mcp-setup setup-git
+install: link install-brew install-brew-packages install-languages install-npm install-cargo install-go install-pipx setup-env mcp-setup claude-setup setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -179,6 +179,13 @@ mcp-setup:
 	fi
 	@./mcp/scripts/sync-mcp.sh
 	@echo "✅ MCP setup complete (~/.mcp.json generated)"
+
+# Claude Code設定セットアップ
+claude-setup:
+	@echo "🔧 Setting up Claude Code..."
+	@chmod +x $(PWD)/claude/statusline/statusline.ts
+	@chmod +x $(PWD)/claude/hooks/notify.ts
+	@echo "✅ Claude Code setup complete"
 
 # Git個人設定
 setup-git:
