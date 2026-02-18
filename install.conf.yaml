@@ -17,6 +17,8 @@
       path: fzf/.fzf.zsh
     ~/.config/sheldon:
       path: sheldon
+    ~/.config/ghostty:
+      path: ghostty
     ~/.config/wezterm:
       path: wezterm
     ~/.config/starship.toml:
