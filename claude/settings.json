@@ -5,6 +5,69 @@
     "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
   },
   "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "mcp__atlassian__atlassianUserInfo",
+      "mcp__atlassian__fetch",
+      "mcp__atlassian__getAccessibleAtlassianResources",
+      "mcp__atlassian__getConfluenceCommentChildren",
+      "mcp__atlassian__getConfluencePage",
+      "mcp__atlassian__getConfluencePageDescendants",
+      "mcp__atlassian__getConfluencePageFooterComments",
+      "mcp__atlassian__getConfluencePageInlineComments",
+      "mcp__atlassian__getConfluenceSpaces",
+      "mcp__atlassian__getJiraIssue",
+      "mcp__atlassian__getJiraIssueRemoteIssueLinks",
+      "mcp__atlassian__getJiraIssueTypeMetaWithFields",
+      "mcp__atlassian__getJiraProjectIssueTypesMetadata",
+      "mcp__atlassian__getPagesInConfluenceSpace",
+      "mcp__atlassian__getTransitionsForJiraIssue",
+      "mcp__atlassian__getVisibleJiraProjects",
+      "mcp__atlassian__lookupJiraAccountId",
+      "mcp__atlassian__search",
+      "mcp__atlassian__searchConfluenceUsingCql",
+      "mcp__atlassian__searchJiraIssuesUsingJql",
+      "mcp__mcp-atlassian__confluence_download_attachment",
+      "mcp__mcp-atlassian__confluence_download_content_attachments",
+      "mcp__mcp-atlassian__confluence_get_attachments",
+      "mcp__mcp-atlassian__confluence_get_comments",
+      "mcp__mcp-atlassian__confluence_get_labels",
+      "mcp__mcp-atlassian__confluence_get_page",
+      "mcp__mcp-atlassian__confluence_get_page_children",
+      "mcp__mcp-atlassian__confluence_get_page_history",
+      "mcp__mcp-atlassian__confluence_get_page_views",
+      "mcp__mcp-atlassian__confluence_search",
+      "mcp__mcp-atlassian__confluence_search_user",
+      "mcp__mcp-atlassian__jira_batch_get_changelogs",
+      "mcp__mcp-atlassian__jira_download_attachments",
+      "mcp__mcp-atlassian__jira_get_agile_boards",
+      "mcp__mcp-atlassian__jira_get_all_projects",
+      "mcp__mcp-atlassian__jira_get_board_issues",
+      "mcp__mcp-atlassian__jira_get_field_options",
+      "mcp__mcp-atlassian__jira_get_issue",
+      "mcp__mcp-atlassian__jira_get_issue_dates",
+      "mcp__mcp-atlassian__jira_get_issue_development_info",
+      "mcp__mcp-atlassian__jira_get_issue_proforma_forms",
+      "mcp__mcp-atlassian__jira_get_issue_sla",
+      "mcp__mcp-atlassian__jira_get_issues_development_info",
+      "mcp__mcp-atlassian__jira_get_link_types",
+      "mcp__mcp-atlassian__jira_get_proforma_form_details",
+      "mcp__mcp-atlassian__jira_get_project_components",
+      "mcp__mcp-atlassian__jira_get_project_issues",
+      "mcp__mcp-atlassian__jira_get_project_versions",
+      "mcp__mcp-atlassian__jira_get_queue_issues",
+      "mcp__mcp-atlassian__jira_get_service_desk_for_project",
+      "mcp__mcp-atlassian__jira_get_service_desk_queues",
+      "mcp__mcp-atlassian__jira_get_sprint_issues",
+      "mcp__mcp-atlassian__jira_get_sprints_from_board",
+      "mcp__mcp-atlassian__jira_get_transitions",
+      "mcp__mcp-atlassian__jira_get_user_profile",
+      "mcp__mcp-atlassian__jira_get_worklog",
+      "mcp__mcp-atlassian__jira_search",
+      "mcp__mcp-atlassian__jira_search_fields",
+      "WebSearch"
+    ]
+  },
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
@@ -13,7 +76,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notify.ts"
+            "command": "~/.claude/hooks/notify.sh"
           }
         ]
       }
@@ -24,7 +87,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notify.ts"
+            "command": "~/.claude/hooks/notify.sh"
           }
         ]
       }
@@ -34,5 +97,27 @@
     "type": "command",
     "command": "~/.claude/statusline/statusline.ts"
   },
-  "language": "Japanese"
+  "enabledPlugins": {
+    "superpowers-lab@superpowers-marketplace": true,
+    "claude-session-driver@superpowers-marketplace": true,
+    "superpowers@superpowers-marketplace": true,
+    "double-shot-latte@superpowers-marketplace": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true,
+    "explanatory-output-style@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "superpowers-chrome@superpowers-marketplace": true,
+    "superpowers-dev@superpowers-marketplace": true,
+    "superpowers-developing-for-claude-code@superpowers-marketplace": true
+  },
+  "language": "Japanese",
+  "skipDangerousModePermissionPrompt": true
 }
