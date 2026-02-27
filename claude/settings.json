@@ -7,6 +7,8 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
+      "WebSearch",
+      "WebFetch",
       "mcp__atlassian__atlassianUserInfo",
       "mcp__atlassian__fetch",
       "mcp__atlassian__getAccessibleAtlassianResources",
@@ -64,8 +66,7 @@
       "mcp__mcp-atlassian__jira_get_user_profile",
       "mcp__mcp-atlassian__jira_get_worklog",
       "mcp__mcp-atlassian__jira_search",
-      "mcp__mcp-atlassian__jira_search_fields",
-      "WebSearch"
+      "mcp__mcp-atlassian__jira_search_fields"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -116,7 +117,11 @@
     "skill-creator@claude-plugins-official": true,
     "superpowers-chrome@superpowers-marketplace": true,
     "superpowers-dev@superpowers-marketplace": true,
-    "superpowers-developing-for-claude-code@superpowers-marketplace": true
+    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
+    "supabase@claude-plugins-official": true,
+    "qodo-skills@claude-plugins-official": true,
+    "elements-of-style@superpowers-marketplace": true,
+    "episodic-memory@superpowers-marketplace": true
   },
   "language": "Japanese",
   "skipDangerousModePermissionPrompt": true
