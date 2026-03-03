@@ -53,12 +53,7 @@ else
   MESSAGE="Action required"
 fi
 
-# Send notification
-terminal-notifier \
-  -title "$TITLE" \
-  -subtitle "$SUBTITLE" \
-  -message "$MESSAGE" \
-  -sound default \
-  -group "claude-code-${REPO_NAME}" &>/dev/null || true
+# Send notification via osascript
+osascript -e "display notification \"${SUBTITLE} - ${MESSAGE}\" with title \"${TITLE}\" sound name \"default\"" &>/dev/null || true
 
 echo '{"success": true}'

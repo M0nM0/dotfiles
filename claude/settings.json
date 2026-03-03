@@ -102,7 +102,7 @@
     "superpowers-lab@superpowers-marketplace": true,
     "claude-session-driver@superpowers-marketplace": true,
     "superpowers@superpowers-marketplace": true,
-    "double-shot-latte@superpowers-marketplace": true,
+    "double-shot-latte@superpowers-marketplace": false,
     "feature-dev@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
