@@ -16,11 +16,13 @@
 	lo = log --oneline
 	f = fetch
 	m = merge
+  rb = rebase
 	rs = restore
 	rsst = restore --staged
 	r = reset
   st = stash
   sta = stash apply
+  w = worktree
 
 [init]
 	defaultBranch = main
