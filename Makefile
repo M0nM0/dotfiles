@@ -183,8 +183,7 @@ mcp-setup:
 # Claude Code設定セットアップ
 claude-setup:
 	@echo "🔧 Setting up Claude Code..."
-	@chmod +x $(PWD)/claude/statusline/statusline.ts
-	@chmod +x $(PWD)/claude/hooks/notify.ts
+	@find $(PWD)/claude -type f \( -name '*.sh' -o -name '*.ts' \) -exec chmod +x {} +
 	@echo "✅ Claude Code setup complete"
 
 # Git個人設定
