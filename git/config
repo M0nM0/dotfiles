@@ -23,6 +23,9 @@
   st = stash
   sta = stash apply
   w = worktree
+  # merge --squash and commit in one step, with a message like "Merge branch 'feature' into main"
+	smerge = "!f() { \\\n  src=$1; \\\n  dest=$(git rev-parse --abbrev-ref HEAD); \\\n  git merge --squash \"$src\" && \\\n  git commit -m \"Merge branch '$src' into $dest\"; \\\n}; f"
+
 
 [init]
 	defaultBranch = main
