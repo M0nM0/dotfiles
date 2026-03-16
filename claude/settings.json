@@ -2,7 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "DISABLE_AUTOUPDATER": "1",
-    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
+    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
@@ -152,8 +153,10 @@
     "supabase@claude-plugins-official": true,
     "qodo-skills@claude-plugins-official": true,
     "elements-of-style@superpowers-marketplace": true,
-    "episodic-memory@superpowers-marketplace": true
+    "episodic-memory@superpowers-marketplace": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "language": "Japanese",
+  "voiceEnabled": true,
   "skipDangerousModePermissionPrompt": true
 }
