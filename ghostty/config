@@ -1,8 +1,51 @@
-theme = Japanesque
-window-padding-x = 20
-window-padding-y = 5
+# カラースキーム
+theme = GitHub Dark
+background = 000000
+
+# 背景（WezTerm: 90%、ブラーなし）
+background-opacity = 0.90
+background-blur-radius = 0
+
+# パディング（WezTerm: 左右4, 上下7.5）
+window-padding-x = 4
+window-padding-y = 8
+
+# ウィンドウ
 window-padding-balance = true
 window-theme = ghostty
-background-opacity = 0.85
-background-blur-radius = 20
 macos-titlebar-style = transparent
+
+# カーソル（WezTerm: SteadyBar, 点滅なし）
+cursor-style = bar
+cursor-style-blink = false
+
+# キーバインド — WezTerm の主要バインドを再現
+# タブ操作
+keybind = super+t=new_tab
+keybind = super+w=close_surface
+keybind = super+shift+w=close_tab
+keybind = super+left_bracket=previous_tab
+keybind = super+right_bracket=next_tab
+
+# ペイン分割（⌘+\ = 縦分割、⌘+Shift+\ = 横分割）
+keybind = super+backslash=new_split:right
+keybind = super+shift+backslash=new_split:down
+
+# ペイン移動 (vim-style: ⌘+Shift+hjkl)
+keybind = super+shift+h=goto_split:left
+keybind = super+shift+j=goto_split:bottom
+keybind = super+shift+k=goto_split:top
+keybind = super+shift+l=goto_split:right
+
+# ペインズーム
+keybind = super+enter=toggle_split_zoom
+
+# コピー/ペースト
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+
+# フルスクリーン
+keybind = f11=toggle_fullscreen
+
+# 検索
+keybind = super+f=open_search
