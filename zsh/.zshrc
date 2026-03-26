@@ -87,3 +87,5 @@ export PATH="$PATH:$HOME.local/bin"
 # Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
 eval "$(mise activate zsh --shims)"
 
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

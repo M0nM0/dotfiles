@@ -67,7 +67,22 @@
       "mcp__mcp-atlassian__jira_get_user_profile",
       "mcp__mcp-atlassian__jira_get_worklog",
       "mcp__mcp-atlassian__jira_search",
-      "mcp__mcp-atlassian__jira_search_fields"
+      "mcp__mcp-atlassian__jira_search_fields",
+      "mcp__slack__slack_read_user_profile",
+      "mcp__slack__slack_read_channel",
+      "mcp__slack__slack_read_thread",
+      "mcp__slack__slack_read_canvas",
+      "mcp__slack__slack_search_public",
+      "mcp__slack__slack_search_public_and_private",
+      "mcp__slack__slack_search_channels",
+      "mcp__slack__slack_search_users"
+    ],
+    "ask": [
+      "mcp__slack__slack_send_message",
+      "mcp__slack__slack_send_message_draft",
+      "mcp__slack__slack_schedule_message",
+      "mcp__slack__slack_create_canvas",
+      "mcp__slack__slack_update_canvas"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -154,7 +169,24 @@
     "qodo-skills@claude-plugins-official": true,
     "elements-of-style@superpowers-marketplace": true,
     "episodic-memory@superpowers-marketplace": true,
-    "lua-lsp@claude-plugins-official": true
+    "lua-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "atlassian@claude-plugins-official": true,
+    "agent-sdk-dev@claude-code-plugins": true,
+    "commit-commands@claude-code-plugins": true,
+    "pr-review-toolkit@claude-code-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
+    }
   },
   "language": "Japanese",
   "voiceEnabled": true,
