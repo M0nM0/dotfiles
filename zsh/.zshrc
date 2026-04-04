@@ -19,6 +19,10 @@ setopt HIST_FIND_NO_DUPS      # 履歴検索時に重複を表示しない
 setopt HIST_REDUCE_BLANKS     # 余分な空白を削除して履歴に保存
 setopt HIST_SAVE_NO_DUPS      # 保存時に重複を削除
 
+# mise (polyglot version manager)
+# Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
+eval "$(mise activate zsh --shims)"
+
 # Homebrew (Mac Apple Silicon / Linux 両対応)
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # Mac (Apple Silicon)
@@ -27,10 +31,6 @@ elif [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
   # Linux (system-wide)
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-
-# mise (polyglot version manager)
-# Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
-eval "$(mise activate zsh --shims)"
 
 # zsh
 eval "$(sheldon source)"
