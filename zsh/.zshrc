@@ -19,10 +19,6 @@ setopt HIST_FIND_NO_DUPS      # 履歴検索時に重複を表示しない
 setopt HIST_REDUCE_BLANKS     # 余分な空白を削除して履歴に保存
 setopt HIST_SAVE_NO_DUPS      # 保存時に重複を削除
 
-# mise (polyglot version manager)
-# Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
-eval "$(mise activate zsh --shims)"
-
 # Homebrew (Mac Apple Silicon / Linux 両対応)
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # Mac (Apple Silicon)
@@ -79,18 +75,18 @@ zshaddhistory() {
   [[ ! "$line" =~ "^(cd|jj?|lazygit|la|ll|ls|rm|rmdir)($| )" ]]
 }
 
+# mise (polyglot version manager)
+# Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
+eval "$(mise activate zsh --shims)"
+
 # Android Studio
-export ANDROID_SDK_ROOT=/Users/visha/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
 export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 
 # pipx (Python CLI tools manager)
 export PATH="$PATH:$HOME.local/bin"
 
-# mise (polyglot version manager)
-# Note: This must be loaded AFTER all PATH modifications to ensure mise shims take precedence
-eval "$(mise activate zsh --shims)"
-
-
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
+export PATH="$PATH":"$HOME/.pub-cache/bin"
