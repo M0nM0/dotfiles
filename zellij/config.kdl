@@ -1,0 +1,11 @@
+// テーマ
+theme "dracula"
+
+// デフォルトシェル
+default_shell "zsh"
+
+// マウス
+mouse_mode true
+
+// macOS のクリップボード連携
+copy_command "pbcopy"

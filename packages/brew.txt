@@ -5,6 +5,7 @@ sheldon
 # 開発ツール
 neovim
 tmux
+zellij
 git
 curl
 claude-code

@@ -38,6 +38,8 @@
       path: direnv
     ~/.config/fastfetch:
       path: fastfetch
+    ~/.config/zellij:
+      path: zellij
     ~/.claude/:
       glob: true
       path: claude/*
