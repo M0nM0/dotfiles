@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {}
+    },
+    "mcp-openmemory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["@peakmojo/mcp-openmemory@latest"],
+      "env": {
+        "MEMORY_DB_PATH": "$HOME/mcp-memory.sqlite"
+      }
+    },
+    "mkdocs-mcp": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/douinc/mkdocs-mcp-plugin",
+        "--with",
+        "mkdocs-material",
+        "--with",
+        "mkdocs-git-revision-date-localized-plugin",
+        "--with",
+        "mkdocs-minify-plugin",
+        "--with",
+        "mkdocs-mermaid2-plugin",
+        "--with",
+        "mkdocs-print-site-plugin",
+        "mkdocs-mcp"
+      ],
+      "env": {
+        "MKDOCS_PORT": "8000"
+      }
+    }
+  }
+}

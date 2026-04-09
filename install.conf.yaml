@@ -43,6 +43,9 @@
     ~/.claude/:
       glob: true
       path: claude/*
+    ~/.mcp.json:
+      path: mcp/mcp.json
+      force: true
     ~/.envrc:
       path: .envrc
     ~/.tool-versions:

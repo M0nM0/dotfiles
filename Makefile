@@ -17,7 +17,7 @@ help:
 	@echo "  make install-packages  - パッケージ再インストール"
 
 # 初回セットアップ
-install: link install-brew install-brew-packages install-languages install-npm install-cargo install-go install-pipx setup-env mcp-setup claude-setup setup-git
+install: link install-brew install-brew-packages install-languages install-npm install-cargo install-go install-pipx setup-env claude-setup setup-git
 	@echo "✅ Setup complete!"
 	@echo ""
 	@echo "Next steps:"
@@ -148,7 +148,6 @@ update:
 	@if command -v cargo >/dev/null 2>&1; then cargo install-update -a; fi
 	@if command -v npm >/dev/null 2>&1; then npm update -g; fi
 	@git submodule update --remote --merge && git -C nvim checkout main
-	@make mcp-setup
 	@echo "✅ All packages updated"
 
 # 環境変数セットアップ（.env + direnv）
@@ -167,18 +166,6 @@ setup-env:
 	else \
 		echo "⚠️  direnv not found. Install it with: brew install direnv"; \
 	fi
-
-# MCP設定のセットアップ（冪等）
-mcp-setup:
-	@echo "🔧 Setting up MCP configuration..."
-	@mkdir -p ~/.config/mcp/conf.d
-	@ln -sf $(PWD)/mcp/conf.d/00-common.json ~/.config/mcp/conf.d/00-common.json
-	@if [ ! -f ~/.env ]; then \
-		echo "⚠️  ~/.env not found. Run: make setup-env"; \
-		exit 1; \
-	fi
-	@./mcp/scripts/sync-mcp.sh
-	@echo "✅ MCP setup complete (~/.mcp.json generated)"
 
 # Claude Code設定セットアップ
 claude-setup:

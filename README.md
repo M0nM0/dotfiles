@@ -103,15 +103,8 @@ dotfiles/
 │   ├── brew.txt         # Homebrew
 │   ├── cargo.txt        # cargo
 │   └── go.txt           # Go (Go パッケージ)
-├── mcp/                  # MCP設定（Claude Code + Gemini CLI）
-│   ├── conf.d/          # 設定ファイル（番号順にマージ）
-│   │   ├── 00-common.json         # 共通設定（dotfiles管理）
-│   │   ├── 50-work.json.example   # 社内PC用テンプレート
-│   │   ├── 90-local.json.example  # ローカル用テンプレート
-│   │   └── README.md              # MCP設定ガイド
-│   ├── .gitignore       # 個人設定を除外
-│   └── scripts/
-│       └── sync-mcp.sh  # 同期スクリプト
+├── mcp/                  # MCP設定（Claude Code）
+│   └── mcp.json         # MCPサーバー定義（~/.mcp.json にシンボリックリンク）
 ├── zsh/                  # zsh設定
 ├── tmux/                 # tmux設定
 ├── sheldon/              # zshプラグイン管理
@@ -163,36 +156,13 @@ zsh/aliases/
 
 仕事用やマシン固有のaliasは `zsh/aliases/local.zsh` に追加します（git管理外）。
 
-### MCP設定（Claude Code + Gemini CLI）
+### MCP設定
 
-MCPサーバーの設定は`mcp/conf.d/`で管理します。
+MCPサーバーの設定は `mcp/mcp.json` 1ファイルで管理します。`install.conf.yaml` により `~/.mcp.json` へシンボリックリンクされるので、編集するだけで即反映されます。
 
-#### 初回セットアップ
+追加・削除はファイルを直接編集。sync スクリプトも direnv も不要です。
 
-```bash
-make mcp-init              # 初期化
-vim ~/.env                 # トークン設定（GITHUB_TOKEN等）
-direnv allow               # direnv有効化
-make mcp-sync              # Claude Code + Gemini CLIに反映
-```
-
-#### 社内PC設定の追加
-
-```bash
-cp ~/.config/mcp/conf.d/50-work.json{.example,}
-vim ~/.env                 # 社内トークン追加
-make mcp-sync              # 再同期
-```
-
-#### ローカルプロジェクト設定
-
-```bash
-cp ~/.config/mcp/conf.d/90-local.json{.example,}
-vim ~/.config/mcp/conf.d/90-local.json
-make mcp-sync
-```
-
-詳細は `mcp/conf.d/README.md` を参照。
+> トークンが必要なサーバー（例: GitHub MCP）は現在使っていないため、このファイルには環境変数展開の仕組みはありません。必要になった場合は `claude mcp add -s user` 等の個別管理に寄せます。
 
 ### Claude Code設定
 
