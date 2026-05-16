@@ -12,6 +12,9 @@
 
 shell = "zsh"
 
+# zsh-autocomplete must be loaded early to avoid ZLE hook conflicts
+[plugins.zsh-autocomplete]
+github = "marlonrichert/zsh-autocomplete"
 
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
@@ -62,9 +65,6 @@ apply = ["defer"]
 [plugins.zeno_zsh]
 github = 'yuki-yano/zeno.zsh'
 apply = ["defer"]
-
-[plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
 
 [plugins.zsh-autopair]
 github = "hlissner/zsh-autopair"
