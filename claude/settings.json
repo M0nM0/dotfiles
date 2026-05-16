@@ -75,7 +75,13 @@
       "mcp__slack__slack_search_public",
       "mcp__slack__slack_search_public_and_private",
       "mcp__slack__slack_search_channels",
-      "mcp__slack__slack_search_users"
+      "mcp__slack__slack_search_users",
+      "Bash(cd:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "mcp__codex__codex",
+      "mcp__codex__codex-reply",
+      "Bash(node \"$HOME/.claude/plugins:*)"
     ],
     "ask": [
       "mcp__slack__slack_send_message",
@@ -83,7 +89,8 @@
       "mcp__slack__slack_schedule_message",
       "mcp__slack__slack_create_canvas",
       "mcp__slack__slack_update_canvas"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "enableAllProjectMcpServers": true,
   "hooks": {
@@ -178,7 +185,12 @@
     "atlassian@claude-plugins-official": true,
     "agent-sdk-dev@claude-code-plugins": true,
     "commit-commands@claude-code-plugins": true,
-    "pr-review-toolkit@claude-code-plugins": true
+    "pr-review-toolkit@claude-code-plugins": true,
+    "codex@openai-codex": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true,
+    "chrome-devtools-mcp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-code-plugins": {
@@ -186,9 +198,18 @@
         "source": "github",
         "repo": "anthropics/claude-code"
       }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
     }
   },
   "language": "Japanese",
-  "voiceEnabled": true,
-  "skipDangerousModePermissionPrompt": true
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "autoCompactEnabled": false,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }

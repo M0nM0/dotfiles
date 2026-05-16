@@ -87,6 +87,4 @@ export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 # pipx (Python CLI tools manager)
 export PATH="$PATH:$HOME.local/bin"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
 export PATH="$PATH":"$HOME/.pub-cache/bin"
