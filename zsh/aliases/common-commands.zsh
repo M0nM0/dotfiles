@@ -29,6 +29,10 @@ alias df='df -h'
 alias du='du -h'
 alias dus='du -sh'
 
+# commna
+alias wh='which'
+alias wha='which -a'
+
 # その他
 alias pc='pbcopy'
 alias mant='tldr'
