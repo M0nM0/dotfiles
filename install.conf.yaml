@@ -43,6 +43,9 @@
     ~/.claude/:
       glob: true
       path: claude/*
+    ~/.codex/config.toml:
+      path: codex/config.toml
+      force: true
     ~/.mcp.json:
       path: mcp/mcp.json
       force: true
