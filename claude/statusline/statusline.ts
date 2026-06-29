@@ -102,32 +102,40 @@ function tokenLabelColor(tokens: number): string {
   return baseCellColor(Math.min(cellIdx, BASE_CELLS - 1))
 }
 
-async function calculateTokensFromTranscript(filePath: string): Promise<number> {
+type TokenStats = { current: number; cumulative: number }
+
+function sumUsage(u: Record<string, number>): number {
+  return (
+    (u.input_tokens || 0) +
+    (u.output_tokens || 0) +
+    (u.cache_creation_input_tokens || 0) +
+    (u.cache_read_input_tokens || 0)
+  )
+}
+
+async function calculateTokensFromTranscript(filePath: string): Promise<TokenStats> {
   try {
     const content = await Deno.readTextFile(filePath)
     const lines = content.trim().split("\n")
-    let lastUsage = null
+    let lastUsage: Record<string, number> | null = null
+    let cumulative = 0
     for (const line of lines) {
       try {
         const entry = JSON.parse(line)
         if (entry.type === "assistant" && entry.message?.usage) {
           lastUsage = entry.message.usage
+          cumulative += sumUsage(entry.message.usage)
         }
       } catch {
         // skip
       }
     }
-    if (lastUsage) {
-      return (
-        (lastUsage.input_tokens || 0) +
-        (lastUsage.output_tokens || 0) +
-        (lastUsage.cache_creation_input_tokens || 0) +
-        (lastUsage.cache_read_input_tokens || 0)
-      )
+    return {
+      current: lastUsage ? sumUsage(lastUsage) : 0,
+      cumulative,
     }
-    return 0
   } catch {
-    return 0
+    return { current: 0, cumulative: 0 }
   }
 }
 
@@ -228,7 +236,7 @@ const costUsd: number = data.cost?.total_cost_usd ?? 0
 const username = Deno.env.get("USER") || Deno.env.get("LOGNAME") || ""
 const termCols = parseInt(Deno.env.get("COLUMNS") || "120", 10) || 120
 
-const tokenTask = (async (): Promise<number> => {
+const tokenTask = (async (): Promise<TokenStats> => {
   if (transcriptPath) {
     try {
       const stat = await Deno.stat(transcriptPath)
@@ -249,15 +257,17 @@ const tokenTask = (async (): Promise<number> => {
       }
     } catch { /* no projects dir */ }
   }
-  return 0
+  return { current: 0, cumulative: 0 }
 })()
 
-const [totalTokens, gitBranch, gitDirty, osSym] = await Promise.all([
+const [tokenStats, gitBranch, gitDirty, osSym] = await Promise.all([
   tokenTask,
   cwd ? getGitBranch(cwd) : Promise.resolve(""),
   cwd ? getGitDirty(cwd) : Promise.resolve(false),
   osIcon(),
 ])
+const totalTokens = tokenStats.current
+const cumulativeTokens = tokenStats.cumulative
 
 const truncatedPath = cwd ? truncatePath(cwd) : ""
 const time = new Date().toLocaleTimeString("ja-JP", {
@@ -293,6 +303,10 @@ if (modelName) parts.push(`${C.blue}${modelName}${C.reset}`)
     block += ` ${C.grey}(+${formatTokens(over)})${C.reset}`
   }
   parts.push(block)
+}
+
+if (cumulativeTokens > 0) {
+  parts.push(`${C.grey}Σ ${formatTokens(cumulativeTokens)}${C.reset}`)
 }
 
 if (costUsd > 0) {
