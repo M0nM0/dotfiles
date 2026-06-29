@@ -211,5 +211,6 @@
   "skipDangerousModePermissionPrompt": true,
   "autoCompactEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "tui": "fullscreen"
 }
