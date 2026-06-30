@@ -88,3 +88,10 @@ export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
 export PATH="$PATH:$HOME.local/bin"
 
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# Load shell snippets managed in ~/.config/shell (git-tracked)
+if [[ -d "$HOME/.config/shell" ]]; then
+  for f in "$HOME/.config/shell"/*.zsh(N); do
+    source "$f"
+  done
+fi
