@@ -7,7 +7,8 @@ approvals_reviewer = "user"
 
 notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
 personality = "pragmatic"
-model = "gpt-5.5"
+model = "gpt-5.6-sol"
+service_tier = "default"
 
 [sandbox_workspace_write]
 network_access = false
@@ -30,10 +31,6 @@ exclude = [
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@latest"]
 
-[mcp_servers.figma]
-command = "npx"
-args = ["-y", "mcp-remote", "http://127.0.0.1:3845/sse"]
-
 [projects."/Users/momonga/Documents/driver"]
 trust_level = "trusted"
 
@@ -51,4 +48,8 @@ trust_level = "trusted"
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+"gpt-5.6-sol" = 4
+
+[plugins."atlassian-rovo@openai-curated"]
+enabled = true
 

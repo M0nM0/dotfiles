@@ -224,6 +224,7 @@
     "defaultMode": "default",
     "disableBypassPermissionsMode": "disable"
   },
+  "model": "claude-fable-5[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
@@ -264,6 +265,11 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/notify.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/stop-guard.sh",
+            "timeout": 60
           }
         ]
       }
@@ -340,8 +346,8 @@
   },
   "language": "Japanese",
   "effortLevel": "medium",
+  "tui": "fullscreen",
   "autoCompactEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "tui": "fullscreen"
+  "voiceEnabled": true
 }
