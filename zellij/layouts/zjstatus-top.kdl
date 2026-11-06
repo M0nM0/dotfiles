@@ -1,0 +1,23 @@
+// zjstatus のバーを上に置く。色と区切りは tmux のステータスバーに合わせ、prefix (Tmux モード) 中だけ右にキーのヒントを出す (日時は macOS のメニューバーにあるので出さない)
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="https://github.com/dj95/zjstatus/releases/download/v0.25.0/zjstatus.wasm" {
+                format_left  "#[fg=bright_white,bg=colour111,bold] {session} #[fg=colour111,bg=colour238]{tabs}"
+                format_right "{mode}"
+                format_space "#[bg=colour238]"
+
+                // 幅が足りないときは右 (ヒント) を残し、左 (セッション名とタブ) を隠す
+                format_hide_on_overlength "true"
+                format_precedence         "rcl"
+
+                mode_normal "#[bg=colour238]"
+                mode_tmux   "#[fg=colour238,bg=colour180,bold] PREFIX #[fg=colour180,bg=colour238] hjkl:move C-h/l:tab HJKL:size |-:split c:new r:rename x:close e:edit "
+
+                tab_normal "#[fg=colour238,bg=bright_black]#[fg=bright_white,bg=bright_black,bold] {name} #[fg=bright_black,bg=colour238]"
+                tab_active "#[fg=colour238,bg=colour68]#[fg=bright_white,bg=colour68,bold] {name} #[fg=colour68,bg=colour238]"
+            }
+        }
+        children
+    }
+}
