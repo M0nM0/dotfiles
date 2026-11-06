@@ -9,3 +9,53 @@ mouse_mode true
 
 // macOS のクリップボード連携
 copy_command "pbcopy"
+
+// スクロールバックを開くエディタ (EditScrollback)
+scrollback_editor "nvim"
+
+// キーバインド: tmux と同じ prefix (Ctrl-j) + キーで操作する
+keybinds {
+    shared_except "locked" {
+        unbind "Ctrl b"
+        bind "Ctrl j" { SwitchToMode "Tmux"; }
+        // シェル・vim のキー (Backspace, 履歴など) と衝突するため外す
+        unbind "Ctrl h" "Ctrl o" "Ctrl p" "Ctrl n" "Ctrl s" "Ctrl t"
+    }
+    tmux {
+        unbind "Ctrl b"
+        // prefix を 2 回押すと Ctrl-j (LF) をアプリに渡す
+        bind "Ctrl j" { Write 10; SwitchToMode "Normal"; }
+
+        // pane 移動
+        bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
+
+        // tab (tmux の window) 切り替え
+        bind "Ctrl h" { GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "Ctrl l" { GoToNextTab; SwitchToMode "Normal"; }
+
+        // pane リサイズ
+        bind "H" { Resize "Increase Left"; SwitchToMode "Normal"; }
+        bind "J" { Resize "Increase Down"; SwitchToMode "Normal"; }
+        bind "K" { Resize "Increase Up"; SwitchToMode "Normal"; }
+        bind "L" { Resize "Increase Right"; SwitchToMode "Normal"; }
+
+        // 分割・tab 作成・tab 名変更
+        bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "c" { NewTab; SwitchToMode "Normal"; }
+        bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+
+        // スクロール、スクロールバックを nvim で開く、画面とスクロールバックのクリア
+        bind "v" { SwitchToMode "Scroll"; }
+        bind "e" { EditScrollback; SwitchToMode "Normal"; }
+        bind "X" { Clear; SwitchToMode "Normal"; }
+
+        // 外したデフォルトのモードへの入口
+        bind "s" { SwitchToMode "Session"; }
+        bind "t" { SwitchToMode "Tab"; }
+        bind "m" { SwitchToMode "Move"; }
+    }
+}
