@@ -4,6 +4,9 @@ theme "dracula"
 // デフォルトシェル
 default_shell "zsh"
 
+// タブ一覧とモード表示を下の 1 行にまとめる (キーのヒントは出ない)
+default_layout "compact"
+
 // pane の周囲の枠を出さない (分割時は pane の間に区切り線だけが出る)
 pane_frames false
 
