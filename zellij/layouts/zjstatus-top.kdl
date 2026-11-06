@@ -1,21 +1,34 @@
-// zjstatus のバーを上に置く。色と区切りは tmux のステータスバーに合わせ、prefix (Tmux モード) 中だけ右にキーのヒントを出す (日時は macOS のメニューバーにあるので出さない)
+// zjstatus のバーを上に置く。配色はテーマ (dracula) に合わせ、prefix (Tmux モード) 中だけ右にキーのヒントを出す
 layout {
     default_tab_template {
         pane size=1 borderless=true {
             plugin location="https://github.com/dj95/zjstatus/releases/download/v0.25.0/zjstatus.wasm" {
-                format_left  "#[fg=bright_white,bg=colour111,bold] {session} #[fg=colour111,bg=colour238]{tabs}"
+                color_bg      "#21222c"
+                color_surface "#44475a"
+                color_muted   "#8a91b4"
+                color_purple  "#bd93f9"
+                color_cyan    "#8be9fd"
+                color_pink    "#ff79c6"
+                color_orange  "#ffb86c"
+                color_green   "#50fa7b"
+
+                format_left  "#[fg=$purple,bg=$bg,bold] {session} #[fg=$surface,bg=$bg]│{tabs}"
                 format_right "{mode}"
-                format_space "#[bg=colour238]"
+                format_space "#[bg=$bg]"
 
                 // 幅が足りないときは右 (ヒント) を残し、左 (セッション名とタブ) を隠す
                 format_hide_on_overlength "true"
                 format_precedence         "rcl"
 
-                mode_normal "#[bg=colour238]"
-                mode_tmux   "#[fg=colour238,bg=colour180,bold] PREFIX #[fg=colour180,bg=colour238] hjkl:move C-h/l:tab HJKL:size |-:split c:new r:rename x:close e:edit "
+                tab_normal "#[fg=$muted,bg=$bg] {name} "
+                tab_active "#[fg=$cyan,bg=$surface,bold] {name} "
 
-                tab_normal "#[fg=colour238,bg=bright_black]#[fg=bright_white,bg=bright_black,bold] {name} #[fg=bright_black,bg=colour238]"
-                tab_active "#[fg=colour238,bg=colour68]#[fg=bright_white,bg=colour68,bold] {name} #[fg=colour68,bg=colour238]"
+                mode_normal     "#[bg=$bg]"
+                mode_locked     "#[fg=$bg,bg=$orange,bold] LOCKED "
+                mode_scroll     "#[fg=$bg,bg=$green,bold] SCROLL "
+                mode_session    "#[fg=$bg,bg=$purple,bold] SESSION "
+                mode_rename_tab "#[fg=$bg,bg=$purple,bold] RENAME "
+                mode_tmux       "#[fg=$cyan,bg=$bg,bold]hjkl #[fg=$muted,bg=$bg]move  #[fg=$cyan,bg=$bg,bold]C-h/l #[fg=$muted,bg=$bg]tab  #[fg=$cyan,bg=$bg,bold]HJKL #[fg=$muted,bg=$bg]size  #[fg=$cyan,bg=$bg,bold]| - #[fg=$muted,bg=$bg]split  #[fg=$cyan,bg=$bg,bold]c #[fg=$muted,bg=$bg]new  #[fg=$cyan,bg=$bg,bold]r #[fg=$muted,bg=$bg]rename  #[fg=$cyan,bg=$bg,bold]x #[fg=$muted,bg=$bg]close  #[fg=$cyan,bg=$bg,bold]e #[fg=$muted,bg=$bg]edit #[fg=$bg,bg=$pink,bold] PREFIX "
             }
         }
         children
