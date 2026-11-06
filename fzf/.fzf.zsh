@@ -183,6 +183,29 @@ fta() {
   fi
 }
 
+# fzfでzellijセッションを選択する共通関数
+__fzf_select_zellij_session() {
+  zellij list-sessions -n 2>/dev/null | \
+    fzf --prompt="Zellij Session> " \
+        --header='Enter: attach | Ctrl-X: delete session' \
+        --preview 'case {} in *EXITED*) echo "(終了済み: attach すると復元)";; *) zellij --session {1} action query-tab-names;; esac' \
+        --preview-window=right:60% \
+        --bind 'ctrl-x:execute-silent(zellij delete-session --force {1})+reload(zellij list-sessions -n 2>/dev/null)' | \
+    awk '{print $1}'
+}
+
+# fzfでzellijセッションを選択してattach (zellij の中では切り替え)
+fzl() {
+  local session
+  session=$(__fzf_select_zellij_session)
+  [ -z "$session" ] && return
+  if [ -n "$ZELLIJ" ]; then
+    zellij action switch-session "$session"
+  else
+    zellij attach "$session"
+  fi
+}
+
 # Ctrl-T用のwidget関数
 fzf-tmux-attach-widget() {
   local session
