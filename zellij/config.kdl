@@ -4,6 +4,9 @@ theme "dracula"
 // デフォルトシェル
 default_shell "zsh"
 
+// 起動時に Zellij の tips を出さない
+show_startup_tips false
+
 // タブ一覧とモード表示を上の 1 行にまとめる (layouts/compact-top.kdl、キーのヒントは出ない)
 default_layout "compact-top"
 
