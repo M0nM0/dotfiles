@@ -1,0 +1,7 @@
+// 組み込みの compact レイアウトのバーを上に置いたもの
+layout {
+    pane size=1 borderless=true {
+        plugin location="compact-bar"
+    }
+    pane
+}
