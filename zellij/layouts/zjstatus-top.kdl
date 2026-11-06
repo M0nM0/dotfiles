@@ -1,5 +1,5 @@
 // zjstatus のバーを上に置く。タブとセッション名を角の丸いカプセルで並べ、配色はテーマ (dracula) に合わせる
-// prefix (Tmux モード) 中だけ、右によく使うキーのヒントを出す
+// 右によく使うキーのヒントを出す。普段は暗く、prefix (Tmux モード) 中はキーを明るくする
 layout {
     default_tab_template {
         pane size=1 borderless=true {
@@ -26,7 +26,7 @@ layout {
                 tab_active    "#[fg=$purple,bg=$bg]#[fg=$bg,bg=$purple,bold]{name}#[fg=$purple,bg=$bg]"
                 tab_separator "#[bg=$bg] "
 
-                mode_normal     "#[bg=$bg]"
+                mode_normal     "#[fg=$muted,bg=$bg]hjkl move  C-h/l tab  | - split  c new  x close  #[fg=$surface,bg=$bg]#[fg=$text,bg=$surface]C-j#[fg=$surface,bg=$bg]#[bg=$bg] "
                 mode_locked     "#[fg=$orange,bg=$bg]#[fg=$bg,bg=$orange,bold]LOCKED#[fg=$orange,bg=$bg]#[bg=$bg] "
                 mode_scroll     "#[fg=$green,bg=$bg]#[fg=$bg,bg=$green,bold]SCROLL#[fg=$green,bg=$bg]#[bg=$bg] "
                 mode_session    "#[fg=$purple,bg=$bg]#[fg=$bg,bg=$purple,bold]SESSION#[fg=$purple,bg=$bg]#[bg=$bg] "
