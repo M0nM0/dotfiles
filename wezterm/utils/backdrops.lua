@@ -28,7 +28,7 @@ function BackDrops:init()
       images = {},
       images_dir = wezterm.config_dir .. '/backdrops/',
       focus_color = colors.background,
-      opacity_state = 75,
+      opacity_state = 50,
    }
    local backdrops = setmetatable(inital, self)
    return backdrops
@@ -85,7 +85,7 @@ function BackDrops:_create_opts()
          width = '120%',
          vertical_offset = '-10%',
          horizontal_offset = '-10%',
-         opacity = 0.75,
+         opacity = self.opacity_state / 100,
       },
    }
 end

@@ -51,7 +51,7 @@ return {
    },
 
    -- background
-   -- background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
+   background = backdrops:initial_options(false), -- 起動時は Cmd+B の選択肢で最も透ける 50%
    window_background_opacity = 0.90,
    macos_window_background_blur = 20, -- cmux のサイドバー相当. 0 はブラーなしで GPU 負荷が軽い
 
