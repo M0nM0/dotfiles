@@ -68,6 +68,8 @@ local keys = {
    -- tabs: navigation
    { key = '[',          mods = mod.SUPER,     action = act.ActivateTabRelative(-1) },
    { key = ']',          mods = mod.SUPER,     action = act.ActivateTabRelative(1) },
+   { key = 'Tab',        mods = 'CTRL',        action = act.ActivateTabRelative(1) },
+   { key = 'Tab',        mods = 'CTRL|SHIFT',  action = act.ActivateTabRelative(-1) },
    { key = '[',          mods = mod.SUPER_REV, action = act.MoveTabRelative(-1) },
    { key = ']',          mods = mod.SUPER_REV, action = act.MoveTabRelative(1) },
 
