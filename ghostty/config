@@ -49,3 +49,10 @@ keybind = f11=toggle_fullscreen
 
 # 検索
 keybind = super+f=open_search
+
+macos-option-as-alt = true
+
+keybind = alt+i=esc:i
+keybind = alt+e=esc:e
+keybind = alt+u=esc:u
+keybind = alt+n=esc:n
