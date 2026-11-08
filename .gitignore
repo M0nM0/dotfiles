@@ -19,3 +19,6 @@ zsh/aliases/local.zsh
 # pnpm
 node_modules/
 pnpm-lock.yaml
+
+# karabiner の自動バックアップ
+karabiner/automatic_backups/
