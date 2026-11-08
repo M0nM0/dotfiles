@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 local platform = require('utils.platform')
 
 local font_family = 'JetBrainsMono Nerd Font'
-local font_size = 12.0
+local font_size = 12.0 / 1.1 -- Cmd+- 1段階分 (DecreaseFontSize は 1.1 で割る)
 
 return {
    font = wezterm.font({
