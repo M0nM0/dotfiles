@@ -21,8 +21,26 @@ return {
 
    -- color scheme
    -- colors = colors, -- use colors.custom
-   color_scheme = 'GitHub Dark',
+   color_scheme = 'Catppuccin Mocha',
+   -- color_scheme = 'GitHub Dark',
    -- color_scheme = 'Adventure',
+
+   -- Catppuccin Mocha からの差分上書き
+   -- 背景は純黒を維持し、背景に沈んで読めない bright black を引き上げる
+   -- brights は8色すべての指定が必須 (部分指定は起動時エラーになる)
+   colors = {
+      background = '#000000',
+      brights = {
+         '#7f849c', -- overlay1. 本家の #585b70 は 2.5:1 でコメントや薄字が読めない
+         '#f38ba8', -- red
+         '#a6e3a1', -- green
+         '#f9e2af', -- yellow
+         '#89b4fa', -- blue
+         '#f5c2e7', -- magenta
+         '#94e2d5', -- cyan
+         '#a6adc8', -- white
+      },
+   },
 
    -- bold text brightness
    bold_brightens_ansi_colors = true,
@@ -35,7 +53,7 @@ return {
    -- background
    -- background = backdrops:initial_options(false), -- set to true if you want wezterm to start on focus mode
    window_background_opacity = 0.90,
-   macos_window_background_blur = 0, -- performance friendly(0)
+   macos_window_background_blur = 20, -- cmux のサイドバー相当. 0 はブラーなしで GPU 負荷が軽い
 
    -- scrollbar
    enable_scroll_bar = false,
