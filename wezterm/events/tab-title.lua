@@ -5,6 +5,7 @@
 local wezterm = require('wezterm')
 local Cells = require('utils.cells')
 local OptsValidator = require('utils.opts-validator')
+local Notifications = require('events.notifications')
 
 ---
 -- =======================================
@@ -89,6 +90,10 @@ local RENDER_VARIANTS = {
    { 'scircle_left', 'tab_number', 'wsl', 'title', 'padding', 'scircle_right' },
    { 'scircle_left', 'tab_number', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
 }
+
+for _, variant in ipairs(RENDER_VARIANTS) do
+   table.insert(variant, 3, 'notification')
+end
 
 
 ---@type table<string, Cells.SegmentColors>
@@ -216,12 +221,16 @@ function Tab:set_info(event_opts, tab, max_width)
    ) ~= nil
    self.unseen_output = false
    self.unseen_output_count = 0
+   self.has_notification = Notifications.has_unread(tab.panes)
 
    if not event_opts.hide_active_tab_unseen or not tab.is_active then
       self.unseen_output, self.unseen_output_count = check_unseen_output(tab.panes)
    end
 
    local inset = (self.is_admin or self.is_wsl) and TITLE_INSET.ICON or TITLE_INSET.DEFAULT
+   if self.has_notification then
+      inset = inset + 2
+   end
    if self.unseen_output then
       inset = inset + 2
    end
@@ -238,6 +247,7 @@ function Tab:create_cells()
    self.cells
       :add_segment('scircle_left', GLYPH_SCIRCLE_LEFT)
       :add_segment('tab_number', ' 1 ')
+      :add_segment('notification', '')
       :add_segment('admin', ' ' .. GLYPH_ADMIN)
       :add_segment('wsl', ' ' .. GLYPH_LINUX)
       :add_segment('title', ' ', nil, attr(attr.intensity('Bold')))
@@ -264,6 +274,7 @@ function Tab:update_cells(event_opts, is_active, hover)
    end
 
    self.cells:update_segment_text('title', ' ' .. self.title)
+   self.cells:update_segment_text('notification', self.has_notification and (' ' .. nf.fa_bell) or '')
 
    if event_opts.unseen_icon == 'numbered_box' and self.unseen_output then
       self.cells:update_segment_text(
@@ -281,6 +292,7 @@ function Tab:update_cells(event_opts, is_active, hover)
    self.cells
       :update_segment_colors('scircle_left', colors['scircle_' .. tab_state])
       :update_segment_colors('tab_number', colors['text_' .. tab_state])
+      :update_segment_colors('notification', colors['unseen_output_' .. tab_state])
       :update_segment_colors('admin', colors['text_' .. tab_state])
       :update_segment_colors('wsl', colors['text_' .. tab_state])
       :update_segment_colors('title', colors['text_' .. tab_state])
@@ -361,6 +373,7 @@ M.setup = function(opts)
          tab_list[tab.tab_id]:set_info(valid_opts, tab, max_width)
          tab_list[tab.tab_id]:create_cells()
          tab_list[tab.tab_id].cells:update_segment_text('tab_number', ' ' .. (tab.tab_index + 1) .. ' ')
+         tab_list[tab.tab_id]:update_cells(valid_opts, tab.is_active, hover)
          return tab_list[tab.tab_id]:render()
       end
 

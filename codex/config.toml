@@ -5,7 +5,7 @@ sandbox_mode = "workspace-write"
 approval_policy = "on-request"
 approvals_reviewer = "user"
 
-notify = ["bash", "-lc", "afplay /System/Library/Sounds/Ping.aiff"]
+notify = ["/Users/momonga/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"/bin/bash\", \"/Users/momonga/dotfiles/codex/notify.sh\"]"]
 personality = "pragmatic"
 model = "gpt-5.6-sol"
 service_tier = "default"

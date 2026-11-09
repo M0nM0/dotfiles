@@ -1,0 +1,11 @@
+#!/bin/sh
+# Keep the entry point usable even when an obsolete Intel Python leads PATH.
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+if [ "$(uname -s)" = Darwin ]; then
+  for python in /opt/homebrew/bin/python3 /usr/bin/python3; do
+    if [ -x "$python" ]; then
+      exec "$python" "$SCRIPT_DIR/../utils/term-notify.py" "$@"
+    fi
+  done
+fi
+exec python3 "$SCRIPT_DIR/../utils/term-notify.py" "$@"

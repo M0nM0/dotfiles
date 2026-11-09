@@ -27,6 +27,8 @@ local keys = {
    },
    { key = 'F11', mods = 'NONE',    action = act.ToggleFullScreen },
    { key = 'F12', mods = 'NONE',    action = act.ShowDebugOverlay },
+   { key = 'i',   mods = mod.SUPER_REV, action = act.EmitEvent('notifications.show') },
+   { key = 'n',   mods = mod.SUPER_REV, action = act.EmitEvent('notifications.jump-unread') },
    { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
    {
       key = 'u',

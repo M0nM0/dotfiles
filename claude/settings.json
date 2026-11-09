@@ -266,11 +266,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notify.sh"
-          },
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/stop-guard.sh",
+            "command": "~/.claude/hooks/stop-and-notify.sh",
             "timeout": 60
           }
         ]
@@ -279,6 +275,16 @@
     "Notification": [
       {
         "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
         "hooks": [
           {
             "type": "command",

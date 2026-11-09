@@ -18,6 +18,8 @@
 
 ### Features
 
+- [Terminal notifications](./NOTIFICATIONS.md): shared notifications, unread tab badges, history, and navigation for Claude Code and other tools.
+
 - [**Background Image Selector**](https://github.com/KevinSilvester/wezterm-config/blob/master/utils/backdrops.lua)
 
   - Cycle images
