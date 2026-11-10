@@ -57,6 +57,20 @@ keybinds {
         bind "c" { NewTab; SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
 
+        // タブ一覧を fzf で開き、プレビューを見ながら移動する (scripts/tab-picker.sh)
+        bind "w" {
+            Run "sh" "-c" "exec ~/.config/zellij/scripts/tab-picker.sh" {
+                floating true
+                close_on_exit true
+                name "tabs"
+                x "2%"
+                y "5%"
+                width "95%"
+                height "90%"
+            };
+            SwitchToMode "Normal"
+        }
+
         // スクロール、スクロールバックを nvim で開く、画面とスクロールバックのクリア
         bind "v" { SwitchToMode "Scroll"; }
         bind "e" { EditScrollback; SwitchToMode "Normal"; }
