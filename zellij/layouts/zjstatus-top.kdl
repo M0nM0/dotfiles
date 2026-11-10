@@ -1,5 +1,6 @@
-// zjstatus のバーを上に置く。タブとセッション名を角の丸いカプセルで並べ、配色はテーマ (dracula) に合わせる
+// zjstatus のバーを上に置く。セッション名とタブを角の丸いカプセルで左から並べ、配色はテーマ (dracula) に合わせる
 // 右によく使うキーのヒントを出す。普段は暗く、prefix (Tmux モード) 中はキーを明るくする
+// 下には組み込みの status-bar を置き、モードごとのキーヒントを表示する
 layout {
     default_tab_template {
         pane size=1 borderless=true {
@@ -14,11 +15,11 @@ layout {
                 color_orange  "#ffb86c"
                 color_green   "#50fa7b"
 
-                format_left  "#[bg=$bg] {tabs}"
-                format_right "{mode}#[fg=$surface,bg=$bg]#[fg=$muted,bg=$surface]{session}#[fg=$surface,bg=$bg]#[bg=$bg] "
+                format_left  "#[bg=$bg] #[fg=$surface,bg=$bg]#[fg=$muted,bg=$surface]{session}#[fg=$surface,bg=$bg]#[bg=$bg] {tabs}"
+                format_right "{mode}"
                 format_space "#[bg=$bg]"
 
-                // 幅が足りないときは右 (ヒントとセッション名) を残し、左 (タブ) を隠す
+                // 幅が足りないときは右 (ヒント) を残し、左 (セッション名とタブ) を隠す
                 format_hide_on_overlength "true"
                 format_precedence         "rcl"
 
@@ -35,5 +36,8 @@ layout {
             }
         }
         children
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
     }
 }

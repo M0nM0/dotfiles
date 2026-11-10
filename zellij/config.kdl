@@ -7,7 +7,7 @@ default_shell "zsh"
 // 起動時に Zellij の tips を出さない
 show_startup_tips false
 
-// バーを上の 1 行に置く (layouts/zjstatus-top.kdl、prefix 中だけキーのヒントを出す)
+// セッション名とタブのバーを上に、キーヒントのバーを下に置く (layouts/zjstatus-top.kdl)
 default_layout "zjstatus-top"
 
 // pane の周囲の枠を出さない (分割時は pane の間に区切り線だけが出る)
