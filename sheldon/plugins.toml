@@ -84,6 +84,10 @@ apply = ['fzf-install']
 local = "~/dotfiles/zsh/aliases"
 use = ["*.zsh"]
 
+[plugins.zellij-tab-name]
+local = "~/dotfiles/zellij/zsh"
+use = ["*.zsh"]
+
 [plugins.cclog]
 github = "choplin/cclog"
 

@@ -1,38 +1,34 @@
-// zjstatus のバーを上に置く。セッション名とタブを角の丸いカプセルで左から並べ、配色はテーマ (dracula) に合わせる
-// 右によく使うキーのヒントを出す。普段は暗く、prefix (Tmux モード) 中はキーを明るくする
-// 下には組み込みの status-bar を置き、モードごとのキーヒントを表示する
+// zjstatus のバーを上に置く。cmux のタブの帯に寄せ、選択中のタブは画面と同じ背景にしてアイコンを青くする
+// 左にセッション名、右には prefix 中などのモードだけを出す。キーヒントは下の status-bar に任せる
 layout {
     default_tab_template {
         pane size=1 borderless=true {
             plugin location="https://github.com/dj95/zjstatus/releases/download/v0.25.0/zjstatus.wasm" {
-                color_bg      "#21222c"
-                color_surface "#383a4a"
-                color_text    "#c7cbe0"
-                color_muted   "#8a91b4"
-                color_purple  "#bd93f9"
-                color_cyan    "#8be9fd"
-                color_pink    "#ff79c6"
-                color_orange  "#ffb86c"
-                color_green   "#50fa7b"
+                color_strip "#22252b"
+                color_div   "#33373e"
+                color_text  "#eceef2"
+                color_tab   "#a3a9b3"
+                color_dim   "#6a707a"
+                color_icon  "#b3b9c3"
+                color_blue  "#4c9aff"
+                color_warn  "#ffb340"
+                color_red   "#ff6961"
 
-                format_left  "#[bg=$bg] #[fg=$surface,bg=$bg]#[fg=$muted,bg=$surface]{session}#[fg=$surface,bg=$bg]#[bg=$bg] {tabs}"
+                format_left  "#[bg=$strip]  #[fg=$dim,bg=$strip] #[fg=$text,bg=$strip,bold]{session}#[bg=$strip]    {tabs}"
                 format_right "{mode}"
-                format_space "#[bg=$bg]"
+                format_space "#[bg=$strip]"
 
-                // 幅が足りないときは右 (ヒント) を残し、左 (セッション名とタブ) を隠す
-                format_hide_on_overlength "true"
-                format_precedence         "rcl"
+                // 選択中のタブは bg=default でターミナルの背景色 (透過を含む) のまま抜く
+                tab_normal    "#[bg=$strip]   #[fg=$icon,bg=$strip]󰆍  #[fg=$tab,bg=$strip]{name}   "
+                tab_active    "#[bg=default]   #[fg=$blue,bg=default]󰆍  #[fg=$text,bg=default,bold]{name}   "
+                tab_separator "#[fg=$div,bg=$strip]│"
 
-                tab_normal    "#[fg=$surface,bg=$bg]#[fg=$text,bg=$surface]{name}#[fg=$surface,bg=$bg]"
-                tab_active    "#[fg=$purple,bg=$bg]#[fg=$bg,bg=$purple,bold]{name}#[fg=$purple,bg=$bg]"
-                tab_separator "#[bg=$bg] "
-
-                mode_normal     "#[fg=$muted,bg=$bg]hjkl move  C-h/l tab  | - split  c new  x close  #[fg=$surface,bg=$bg]#[fg=$text,bg=$surface]C-j#[fg=$surface,bg=$bg]#[bg=$bg] "
-                mode_locked     "#[fg=$orange,bg=$bg]#[fg=$bg,bg=$orange,bold]LOCKED#[fg=$orange,bg=$bg]#[bg=$bg] "
-                mode_scroll     "#[fg=$green,bg=$bg]#[fg=$bg,bg=$green,bold]SCROLL#[fg=$green,bg=$bg]#[bg=$bg] "
-                mode_session    "#[fg=$purple,bg=$bg]#[fg=$bg,bg=$purple,bold]SESSION#[fg=$purple,bg=$bg]#[bg=$bg] "
-                mode_rename_tab "#[fg=$purple,bg=$bg]#[fg=$bg,bg=$purple,bold]RENAME#[fg=$purple,bg=$bg]#[bg=$bg] "
-                mode_tmux       "#[fg=$cyan,bg=$bg,bold]hjkl #[fg=$muted,bg=$bg]move  #[fg=$cyan,bg=$bg,bold]C-h/l #[fg=$muted,bg=$bg]tab  #[fg=$cyan,bg=$bg,bold]| - #[fg=$muted,bg=$bg]split  #[fg=$cyan,bg=$bg,bold]c #[fg=$muted,bg=$bg]new  #[fg=$cyan,bg=$bg,bold]x #[fg=$muted,bg=$bg]close  #[fg=$pink,bg=$bg]#[fg=$bg,bg=$pink,bold]PREFIX#[fg=$pink,bg=$bg]#[bg=$bg] "
+                mode_normal     "#[bg=$strip]"
+                mode_tmux       "#[fg=$warn,bg=$strip]● #[fg=$warn,bg=$strip,bold]PREFIX#[bg=$strip]  "
+                mode_locked     "#[fg=$red,bg=$strip]● #[fg=$red,bg=$strip,bold]LOCKED#[bg=$strip]  "
+                mode_scroll     "#[fg=$blue,bg=$strip]● #[fg=$blue,bg=$strip,bold]SCROLL#[bg=$strip]  "
+                mode_session    "#[fg=$blue,bg=$strip]● #[fg=$blue,bg=$strip,bold]SESSION#[bg=$strip]  "
+                mode_rename_tab "#[fg=$blue,bg=$strip]● #[fg=$blue,bg=$strip,bold]RENAME#[bg=$strip]  "
             }
         }
         children
