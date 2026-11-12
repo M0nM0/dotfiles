@@ -3,11 +3,10 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1",
     "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "opus"
   },
-  "attribution": {
-    "sessionUrl": false
-  },
+  "attribution": {},
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -82,6 +81,7 @@
       "Bash(cd:*)",
       "Bash(grep:*)",
       "Bash(find:*)",
+      "Bash(for:*)",
       "mcp__codex__codex",
       "mcp__codex__codex-reply",
       "Bash(node \"$HOME/.claude/plugins:*)"
@@ -181,7 +181,6 @@
       "Bash(git push --mirror *)",
       "Bash(git push --delete *)",
       "Bash(git push * --delete *)",
-      "Bash(git push * :*)",
       "Bash(git credential*)",
       "Bash(git config --global credential.helper store*)",
       "Bash(git config --global * credential.helper store*)",
@@ -214,9 +213,16 @@
       "Bash(terraform plan*)",
       "Bash(git config --global*)",
       "Bash(git config --system*)",
-      "Bash(curl *)",
+      "Bash(curl *-X*)",
+      "Bash(curl *--request*)",
+      "Bash(curl *-d*)",
+      "Bash(curl *--data*)",
+      "Bash(curl *--json*)",
+      "Bash(curl *-F*)",
+      "Bash(curl *--form*)",
+      "Bash(curl *-T*)",
+      "Bash(curl *--upload-file*)",
       "Bash(wget *)",
-      "WebFetch(domain:github.com)",
       "Edit(.gitignore)",
       "Edit(**/.gitignore)",
       "Edit(.github/workflows/**)",
@@ -303,41 +309,20 @@
     "claude-session-driver@superpowers-marketplace": true,
     "superpowers@superpowers-marketplace": false,
     "double-shot-latte@superpowers-marketplace": false,
-    "feature-dev@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "commit-commands@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true,
-    "pr-review-toolkit@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "claude-code-setup@claude-plugins-official": true,
-    "plugin-dev@claude-plugins-official": true,
-    "explanatory-output-style@claude-plugins-official": true,
-    "hookify@claude-plugins-official": false,
-    "skill-creator@claude-plugins-official": true,
     "superpowers-chrome@superpowers-marketplace": true,
     "superpowers-dev@superpowers-marketplace": true,
     "superpowers-developing-for-claude-code@superpowers-marketplace": true,
-    "supabase@claude-plugins-official": true,
     "elements-of-style@superpowers-marketplace": true,
     "episodic-memory@superpowers-marketplace": true,
-    "lua-lsp@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "slack@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "context7@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "atlassian@claude-plugins-official": true,
     "agent-sdk-dev@claude-code-plugins": true,
     "commit-commands@claude-code-plugins": true,
     "pr-review-toolkit@claude-code-plugins": true,
     "codex@openai-codex": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "ruby-lsp@claude-plugins-official": true,
-    "chrome-devtools-mcp@claude-plugins-official": true,
     "private-journal-mcp@superpowers-marketplace": true,
-    "qodo@claude-plugins-official": true
+    "context7@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-code-plugins": {
@@ -351,10 +336,17 @@
         "source": "github",
         "repo": "openai/codex-plugin-cc"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
   },
   "language": "Japanese",
   "effortLevel": "high",
+  "pluginConfigs": {},
   "tui": "fullscreen",
   "autoCompactEnabled": false,
   "agentPushNotifEnabled": true,

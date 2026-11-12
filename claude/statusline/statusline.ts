@@ -229,6 +229,7 @@ const input = decoder.decode(
 const data = JSON.parse(input)
 
 const sessionId: string = data.session_id || ""
+const sessionName: string = data.session_name || ""
 const transcriptPath: string = data.transcript_path || ""
 const cwd: string = data.workspace?.current_dir || data.cwd || ""
 const modelName: string = data.model?.display_name || ""
@@ -313,8 +314,12 @@ if (costUsd > 0) {
   parts.push(`${C.blue}$${costUsd.toFixed(2)}${C.reset}`)
 }
 
-if (sessionId) {
-  parts.push(`${C.grey}⎇ ${sessionId.slice(0, 8)}${C.reset}`)
+if (sessionName || sessionId) {
+  // /rename や --name で付けた名前 (なければ自動生成のタイトル) を ID の前に出す。長い名前は詰める
+  const chars = [...sessionName]
+  const name = chars.length > 24 ? chars.slice(0, 23).join("") + "…" : sessionName
+  const label = [name, sessionId.slice(0, 8)].filter(Boolean).join(" ")
+  parts.push(`${C.grey}⎇ ${label}${C.reset}`)
 }
 
 parts.push(`${C.dim}  ${time}${C.reset}`)
