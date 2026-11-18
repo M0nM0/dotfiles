@@ -29,6 +29,15 @@ keybinds {
         bind "Ctrl j" { SwitchToMode "Tmux"; }
         // シェル・vim のキー (Backspace, 履歴など) と衝突するため外す
         unbind "Ctrl h" "Ctrl o" "Ctrl p" "Ctrl n" "Ctrl s" "Ctrl t"
+        // アプリのキーと衝突するため外す
+        unbind "Ctrl g" "Alt i" "Alt o"
+        bind "Alt g" { SwitchToMode "Locked"; }
+        bind "Alt Shift h" "Alt H" { MoveTab "Left"; }
+        bind "Alt Shift l" "Alt L" { MoveTab "Right"; }
+    }
+    locked {
+        unbind "Ctrl g"
+        bind "Alt g" { SwitchToMode "Normal"; }
     }
     tmux {
         unbind "Ctrl b"
