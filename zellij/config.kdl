@@ -22,6 +22,13 @@ copy_command "pbcopy"
 // スクロールバックを開くエディタ (EditScrollback)
 scrollback_editor "nvim"
 
+// セッション復活時に pane の表示内容も戻す (保存はスクロールバック 1000 行まで)
+serialize_pane_viewport true
+scrollback_lines_to_serialize 1000
+
+// セッション復活時に claude を直前の会話の続きで起動する (-c/-r などの指定済みならそのまま)
+post_command_discovery_hook r#"echo "$RESURRECT_COMMAND" | sed -E "/^claude( |\$)/{/ (-c|--continue|-r|--resume)( |\$)/!s/^claude/claude --continue/;}""#
+
 // キーバインド: tmux と同じ prefix (Ctrl-j) + キーで操作する
 keybinds {
     shared_except "locked" {
@@ -29,6 +36,8 @@ keybinds {
         bind "Ctrl j" { SwitchToMode "Tmux"; }
         // シェル・vim のキー (Backspace, 履歴など) と衝突するため外す
         unbind "Ctrl h" "Ctrl o" "Ctrl p" "Ctrl n" "Ctrl s" "Ctrl t"
+        // 確認なしでセッションごと終了するため外す (終了は prefix+s の Session モードから)
+        unbind "Ctrl q"
         // アプリのキーと衝突するため外す
         unbind "Ctrl g" "Alt i" "Alt o"
         bind "Alt g" { SwitchToMode "Locked"; }
