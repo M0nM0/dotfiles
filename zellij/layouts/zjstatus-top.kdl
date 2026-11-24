@@ -19,9 +19,15 @@ layout {
                 format_space "#[bg=$strip]"
 
                 // 選択中のタブは bg=default でターミナルの背景色 (透過を含む) のまま抜く
-                tab_normal    "#[bg=$strip]   #[fg=$icon,bg=$strip]󰆍  #[fg=$tab,bg=$strip]{name}   "
-                tab_active    "#[bg=default]   #[fg=$blue,bg=default]󰆍  #[fg=$text,bg=default,bold]{name}   "
+                // 番号は prefix + 数字で移動する先のタブ番号
+                tab_normal    "#[bg=$strip]   #[fg=$icon,bg=$strip]󰆍 {index}  #[fg=$tab,bg=$strip]{name}   "
+                tab_active    "#[bg=default]   #[fg=$blue,bg=default]󰆍 {index}  #[fg=$text,bg=default,bold]{name}   "
                 tab_separator "#[fg=$div,bg=$strip]│"
+
+                // zjstatus は画面幅に合わせて切り詰めず、はみ出すとバーが折り返して消えるため、表示するタブ数を絞る
+                tab_display_count         "3"
+                tab_truncate_start_format "#[fg=$dim,bg=$strip]  ‹ +{count}"
+                tab_truncate_end_format   "#[fg=$dim,bg=$strip]+{count} ›  "
 
                 mode_normal     "#[bg=$strip]"
                 mode_tmux       "#[fg=$warn,bg=$strip]● #[fg=$warn,bg=$strip,bold]PREFIX#[bg=$strip]  "
