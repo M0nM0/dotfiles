@@ -41,8 +41,11 @@ keybinds {
         // アプリのキーと衝突するため外す
         unbind "Ctrl g" "Alt i" "Alt o"
         bind "Alt g" { SwitchToMode "Locked"; }
-        bind "Alt Shift h" "Alt H" { MoveTab "Left"; }
-        bind "Alt Shift l" "Alt L" { MoveTab "Right"; }
+        // Alt h/l (既定) は pane のフォーカス移動、Shift 付きはタブの移動
+        bind "Alt Shift h" "Alt H" { GoToPreviousTab; }
+        bind "Alt Shift l" "Alt L" { GoToNextTab; }
+        bind "Alt Shift ," "Alt <" { MoveTab "Left"; }
+        bind "Alt Shift ." "Alt >" { MoveTab "Right"; }
     }
     locked {
         unbind "Ctrl g"
